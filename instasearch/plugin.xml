@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="false"
+            category="org.eclipse.ui"
+            class="it.unibz.instasearch.ui.InstaSearchView"
+            icon="icons/search_results.gif"
+            id="it.unibz.instasearch.ui.InstaSearchView"
+            name="InstaSearch"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               closeable="true"
+               id="it.unibz.instasearch.ui.InstaSearchView"
+               minimized="false"
+               moveable="true"
+               ratio="0.5"
+               relationship="stack"
+               relative="org.eclipse.ui.console.ConsoleView"
+               showTitle="true"
+               standalone="false"
+               visible="true">
+         </view>
+         <viewShortcut
+               id="it.unibz.instasearch.ui.InstaSearchView">
+         </viewShortcut>
+         <actionSet
+               id="it.unibz.instasearch.actionSet">
+         </actionSet>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.viewActions">
+      <viewContribution
+            id="it.unibz.instasearch.viewContribution"
+            targetID="it.unibz.instasearch.ui.InstaSearchView">
+         <menu
+               id="pulldownMenu"
+               label="Pulldown Menu"
+               path="additions">
+         </menu>
+         <action
+               class="it.unibz.instasearch.actions.VisitHomePageActionDelegate"
+               id="it.unibz.instasearch.actions.VisitHomePageActionDelegate"
+               label="Website"
+               menubarPath="pulldown"
+               style="push"
+               tooltip="Visit Home Page of the Plugin">
+         </action>
+         <action
+               class="it.unibz.instasearch.actions.PreferencesAction"
+               id="it.unibz.instasearch.actions.PreferencesAction"
+               label="Preferences..."
+               menubarPath="pulldown"
+               style="push"
+               tooltip="Open Plugin&apos;s Preferences">
+         </action>
+         <action
+               class="it.unibz.instasearch.actions.CheckUpdatesActionDelegate"
+               icon="icons/update.gif"
+               id="it.unibz.instasearch.actions.CheckUpdatesActionDelegate"
+               label="Check for Updates"
+               menubarPath="pulldown"
+               style="push"
+               tooltip="Check for Updates of the Plugin">
+         </action>
+         <action
+               class="it.unibz.instasearch.actions.DeleteIndexActionDelegate"
+               id="it.unibz.instasearch.actions.DeleteIndexActionDelegate"
+               label="Delete Index"
+               menubarPath="pulldown"
+               style="push"
+               tooltip="Delete the Search Index">
+         </action>
+         <action
+               class="it.unibz.instasearch.actions.OpenSearchDialog"
+               icon="icons/search.gif"
+               id="it.unibz.instasearch.actions.OpenSearchDialog"
+               label="Search Dialog"
+               menubarPath="pulldown"
+               style="push"
+               toolbarPath="additions"
+               tooltip="Open Search Dialog...">
+         </action>
+         <action
+               class="it.unibz.instasearch.actions.BuildIndexActionDelegate"
+               icon="icons/binary.gif"
+               id="it.unibz.instasearch.actions.BuildIndexActionDelegate"
+               label="(Re)Build Index"
+               menubarPath="pulldown"
+               style="push"
+               toolbarPath="additions"
+               tooltip="Build or Re-build the Search Index">
+         </action>
+         <action
+               class="it.unibz.instasearch.actions.CollapseAllActionDelegate"
+               icon="icons/collapseall.gif"
+               id="it.unibz.instasearch.actions.CollapseAllActionDelegate"
+               label="Collapse All"
+               style="push"
+               toolbarPath="additions">
+         </action>
+         <action
+               class="it.unibz.instasearch.actions.ExpandAllActionDelegate"
+               icon="icons/expandall.gif"
+               id="it.unibz.instasearch.actions.ExpandAllActionDelegate"
+               label="Expand All"
+               style="push"
+               toolbarPath="additions">
+         </action>
+         <action
+               class="it.unibz.instasearch.actions.IncrementalSearchActionDelegate"
+               id="it.unibz.instasearch.actions.IncrementalSearchActionDelegate"
+               label="Incremental Search"
+               menubarPath="pulldown"
+               state="true"
+               style="toggle"
+               tooltip="Incremental search while typing (Ctrl+J for next match)">
+         </action>
+      </viewContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="it.unibz.instasearch.InstaSearchStartup">
+      </startup>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="it.unibz.instasearch.actionSet"
+            label="InstaSearch"
+            visible="true">
+         <action
+               allowLabelUpdate="true"
+               class="it.unibz.instasearch.actions.ShowInstaSearchAction"
+               definitionId="it.unibz.instasearch.ui.ShowInstaSearch"
+               icon="icons/search_results.gif"
+               id="it.unibz.instasearch.actions.ShowInstaSearchAction"
+               label="InstaSearch..."
+               menubarPath="org.eclipse.search.menu/internalDialogGroup"
+               tooltip="Open InstaSearch View">
+         </action>
+         <menu
+               id="org.eclipse.search.menu"
+               label="%searchMenu.label"
+               path="navigate">
+            <groupMarker
+                  name="internalDialogGroup">
+            </groupMarker>
+            <groupMarker
+                  name="dialogGroup">
+            </groupMarker>
+            <separator
+                  name="fileSearchContextMenuActionsGroup">
+            </separator>
+            <separator
+                  name="contextMenuActionsGroup">
+            </separator>
+            <separator
+                  name="occurencesActionsGroup">
+            </separator>
+            <separator
+                  name="extraSearchGroup">
+            </separator>
+         </menu>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.search.searchPages">
+      <page
+            canSearchEnclosingProjects="true"
+            class="it.unibz.instasearch.ui.InstaSearchPage"
+            enabled="true"
+            extensions="*"
+            icon="icons/search_results.gif"
+            id="it.unibz.instasearch.ui.InstaSearchPage"
+            label="InstaSearch"
+            showScopeSection="true"
+            tabPosition="0">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Show InstaSearch"
+            id="it.unibz.instasearch.ui.ShowInstaSearch"
+            name="ShowInstaSearch">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="it.unibz.instasearch.ui.ShowInstaSearch"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+I">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.eclipse.search.preferences.SearchPreferencePage"
+            class="it.unibz.instasearch.prefs.InstaSearchPreferencePage"
+            id="it.unibz.instasearch.prefs.InstaSearchPreferencePage"
+            name="InstaSearch">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="it.unibz.instasearch.prefs.PreferenceInitializer">
+      </initializer>
+   </extension>
+
+</plugin>

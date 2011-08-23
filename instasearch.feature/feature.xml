@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="it.unibz.instasearch.feature.indigo"
+      label="InstaSearch for Eclipse 3.7 Indigo"
+      version="1.3.2"
+      provider-name="Andrejs Jermakovics"
+      plugin="it.unibz.instasearch">
+
+   <description url="http://code.google.com/a/eclipselabs.org/p/instasearch/">
+      Eclipse plug-in for doing quick search in workspace files using
+a search engine. Shows search results instantly as you type.
+http://code.google.com/a/eclipselabs.org/p/instasearch/
+   </description>
+
+   <copyright>
+      Copyright (C) 2009 Andrejs Jermakovics
+   </copyright>
+
+   <license url="http://www.eclipse.org/org/documents/epl-v10.html">
+      This program and the accompanying materials
+are made available under the terms of the Eclipse Public License
+v1.0
+which accompanies this distribution, and is available at
+
+http://www.eclipse.org/org/documents/epl-v10.html
+   </license>
+
+   <url>
+      <update label="InstaSearch for Eclipse 3.7 Indigo" url="http://code.inf.unibz.it/instasearch/downloads/"/>
+      <discovery label="InstaSearch site" url="http://code.google.com/a/eclipselabs.org/p/instasearch"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.ui" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.lucene" version="2.9.1" match="greaterOrEqual"/>
+      <import plugin="org.apache.lucene.analysis" version="2.9.1" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.httpclient"/>
+      <import plugin="org.apache.commons.lang"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.net"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.search"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.debug.ui"/>
+   </requires>
+
+   <plugin
+         id="it.unibz.instasearch"
+         download-size="0"
+         install-size="0"
+         version="1.3.2"
+         unpack="false"/>
+
+   <data
+         id="epl-v10.html"
+         download-size="0"
+         install-size="0"/>
+
+</feature>
