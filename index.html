@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>InstaSearch Eclipse plug-in by ajermakovics</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>InstaSearch Eclipse plug-in</h1>
+        <p>Eclipse plug-in for fast code search</p>
+        <p class="view"><a href="https://github.com/ajermakovics/eclipse-instasearch">View the Project on GitHub <small>ajermakovics/eclipse-instasearch</small></a></p>
+        <ul>
+          <li><a href="https://github.com/ajermakovics/eclipse-instasearch/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ajermakovics/eclipse-instasearch/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ajermakovics/eclipse-instasearch">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>InstaSearch - Eclipse plug-in for quick code search</h1>
+
+<p>InstaSearch is an  Eclipse plug-in for performing quick and advanced search of workspace files. It indexes files using <a href="http://lucene.apache.org/core/">Lucene</a> and keeps the index up to date automatically. The search is performed instantly as-you-type and resulting files are displayed in an Eclipse view.</p>
+
+<p>Each file then can be previewed using few most matching and relevant lines. A double-click on the match leads to the matching line in the file.</p>
+
+<h2>Download / Installation</h2>
+
+<p>In Eclipse Helios (3.6) or Indigo (3.7) please install using the <strong>Eclipse Marketplace</strong> from the <em>Help</em> menu (<a href="http://marketplace.eclipse.org/updatesite/help?url=http://code.inf.unibz.it/instasearch/downloads/">how-to</a>)</p>
+
+<p>Alternatively you can install using the update site <code>http://code.inf.unibz.it/instasearch/downloads/</code></p>
+
+<p>Java 1.5 or newer is required</p>
+
+<p>( <a href="http://marketplace.eclipse.org/content/instasearch">Add to favorites</a> on Eclipse Marketplace.)</p>
+
+<h2>Main Features</h2>
+
+<ul>
+<li>Instantly shows search results</li>
+<li>Shows a preview using relevant lines</li>
+<li>Periodically updates the index</li>
+<li>Matches partial words (e.g. case in CamelCase)</li>
+<li>Opens and highlights matches in files</li>
+<li>Searches JAR source attachments</li>
+<li>Supports filtering by extension/project/working set</li>
+</ul><p>Screenshot:
+<img src="http://code.inf.unibz.it/instasearch/downloads/images/instasearch_new.jpg" alt="Screenshot"></p>
+
+<h2>Search Tips</h2>
+
+<p>Lucene <a href="http://lucene.apache.org/core/old_versioned_docs/versions/3_0_0/queryparsersyntax.html">query syntax</a> can be used for searching. This includes:</p>
+
+<ul>
+<li>Wildcard searches
+
+<ul>
+<li><code>app* initialize</code></li>
+</ul>
+</li>
+<li>Excluding words
+
+<ul>
+<li><code>application -initialize</code></li>
+</ul>
+</li>
+<li>Fuzzy searches to find similar matches
+
+<ul>
+<li><code>application init~</code></li>
+</ul>
+</li>
+<li>Limit by location - directory, projects or working set
+
+<ul>
+<li><code>proj:MyProject,OtherProject  application  init</code></li>
+<li><code>ws:MyWorkingSet  dir:src  init</code></li>
+</ul>
+</li>
+<li>Limit by filename, extension or modification time
+
+<ul>
+<li><code>name:app*  ext:java,xml,txt  modified:yesterday</code></li>
+</ul>
+</li>
+<li>Search by file name initials (e.g. FOS to find FileOutputStream.java)
+
+<ul>
+<li><code>name:FOS</code></li>
+</ul>
+</li>
+</ul><p>To exclude some folders from search indexing, mark them as <em>Derived</em> in the folder's properties.
+There are also useful Eclipse Search Tips.</p>
+
+<p><strong>Note</strong>: Fuzzy search is started automatically if no exact matches are found</p>
+
+<h2>Bugs/Enhancement Requests</h2>
+
+<p>If you notice any issues with the plugin or have an idea for an enhancement, please open a new ticket</p>
+
+<h2>Authors/Contributors</h2>
+
+<p>Author:  <a href="http://github.com/ajermakovics">Andrejs Jermakovics</a></p>
+
+<p>Contributors:  <a href="http://eclipsehowl.wordpress.com/">Holger Voormann</a></p>
+
+<p>If you'd like to contribute feel free to get in touch or create a  pull request. </p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/ajermakovics">ajermakovics</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
