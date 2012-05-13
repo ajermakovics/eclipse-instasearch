@@ -1,7 +1,7 @@
 InstaSearch - Eclipse plug-in for quick code search
-==
+--
 
-InstaSearch is an  Eclipse plug-in for performing quick and advanced search of workspace files. It indexes files using [Lucene](http://lucene.apache.org/core/) and keeps the index up to date automatically. The search is performed instantly as-you-type and resulting files are displayed in an Eclipse view.
+InstaSearch is an  [Eclipse IDE](http://eclipse.org) plug-in for performing quick and advanced search of workspace files. It indexes files using [Lucene](http://lucene.apache.org/core/) and keeps the index up to date automatically. The search is performed instantly as-you-type and resulting files are displayed in an Eclipse view.
 
 Each file then can be previewed using few most matching and relevant lines. A double-click on the match leads to the matching line in the file.
 
@@ -46,7 +46,7 @@ Lucene [query syntax](http://lucene.apache.org/core/old_versioned_docs/versions/
    * `name:FOS`
 
 To exclude some folders from search indexing, mark them as *Derived* in the folder's properties.
-There are also useful Eclipse Search Tips.
+There are also useful [Eclipse Search Tips](https://github.com/ajermakovics/eclipse-instasearch/wiki/Eclipse-search-tips).
 
 **Note**: Fuzzy search is started automatically if no exact matches are found
 
