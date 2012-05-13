@@ -7,7 +7,7 @@ Each file then can be previewed using few most matching and relevant lines. A do
 
 Download / Installation
 --
-In Eclipse Helios (3.6) or Indigo (3.7) please install using the **Eclipse Marketplace** from the *Help* menu ([how-to](http://marketplace.eclipse.org/updatesite/help?url=http://code.inf.unibz.it/instasearch/downloads/))
+In Eclipse Indigo (3.7) please install using the **Eclipse Marketplace** from the *Help* menu ([how-to](http://marketplace.eclipse.org/updatesite/help?url=http://code.inf.unibz.it/instasearch/downloads/))
 
 Alternatively you can install using the update site `http://code.inf.unibz.it/instasearch/downloads/`
 
