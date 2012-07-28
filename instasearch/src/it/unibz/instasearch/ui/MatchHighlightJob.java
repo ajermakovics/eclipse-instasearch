@@ -199,7 +199,7 @@ class MatchHighlightJob extends Job implements ISchedulingRule, IPartListener
 			if( file == null )
 				return null;
 			
-			IMarker marker = null;		
+			IMarker marker = null;	
 			
 			marker = file.createMarker(NewSearchUI.SEARCH_MARKER);
 			marker.setAttribute(IMarker.TRANSIENT, true);

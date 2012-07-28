@@ -2,6 +2,8 @@
 /* JavaCCOptions:KEEP_LINE_COL=null */
 package it.unibz.instasearch.indexing.tokenizers.standard;
 
+import java.io.IOException;
+
 /**
  * This exception is thrown when parse errors are encountered.
  * You can explicitly create objects of this exception type by
@@ -11,7 +13,7 @@ package it.unibz.instasearch.indexing.tokenizers.standard;
  * You can modify this class to customize your error reporting
  * mechanisms so long as you retain the public fields.
  */
-public class ParseException extends RuntimeException {
+public class ParseException extends IOException {
 
   /**
    * The version identifier for this Serializable class.
@@ -184,4 +186,4 @@ public class ParseException extends RuntimeException {
    }
 
 }
-/* JavaCC - OriginalChecksum=3daa8e3236de7ab1c44859baa09c8e74 (do not edit this line) */
+/* JavaCC - OriginalChecksum=39992ad804c8b7bf1a589ead1e647d51 (do not edit this line) */

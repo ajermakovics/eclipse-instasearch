@@ -89,7 +89,7 @@ TOKEN : {					  // token patterns
 | < #ALPHA: (<LETTER>)+>
 | < #LETTER:					  // unicode letters
       [
-       "_", ".",
+       "_", "-", ".",
        "\u0041"-"\u005a",
        "\u0061"-"\u007a",
        "\u00c0"-"\u00d6",

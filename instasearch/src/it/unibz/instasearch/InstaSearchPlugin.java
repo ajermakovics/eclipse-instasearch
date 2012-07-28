@@ -59,7 +59,7 @@ public final class InstaSearchPlugin extends AbstractUIPlugin {
 	}
 	
 	public void start(BundleContext context) throws Exception {
-		
+
 		configureDebug();
 		
 		try {

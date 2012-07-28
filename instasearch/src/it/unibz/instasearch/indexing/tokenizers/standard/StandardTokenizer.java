@@ -31,8 +31,7 @@ public class StandardTokenizer extends org.apache.lucene.analysis.Tokenizer impl
  * <p>The returned token's type is set to an element of {@link
  * StandardTokenizerConstants#tokenImage}.
  */
-  @SuppressWarnings("unused")
-final public org.apache.lucene.analysis.Token next() throws ParseException, IOException {
+  final public org.apache.lucene.analysis.Token next() throws ParseException {
   Token token = null;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case ALPHANUM:

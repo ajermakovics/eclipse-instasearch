@@ -201,7 +201,7 @@
       <key
             commandId="it.unibz.instasearch.ui.ShowInstaSearch"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M1+M3+I">
+            sequence="M4+M3+I">
       </key>
    </extension>
    <extension

@@ -15,7 +15,7 @@ package it.unibz.instasearch.indexing.tokenizers;
 import org.apache.lucene.analysis.TokenStream;
 
 /**
- * Splits words at non-alphanumeric characters
+ * Splits words at non-alphanumeric characters and characters that don't form identifiers in code
  */
 public class WordSplitTokenizer extends TermSplitTokenizer {
 
@@ -29,7 +29,7 @@ public class WordSplitTokenizer extends TermSplitTokenizer {
 	@Override
 	public String[] splitTerm(String term) 
 	{
-		return term.split("[^A-Za-z0-9\u00E0-\u00FF_'.]"); //"\\W" or "[^A-Za-z0-9'\u00E0-\u00FF]"
+		return term.split("[^A-Za-z0-9\u00E0-\u00FF_'.-]"); //"\\W" or "[^A-Za-z0-9'\u00E0-\u00FF]"
 	}
 	
 }

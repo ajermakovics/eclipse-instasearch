@@ -15,6 +15,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.lucene.index.IndexWriter;
 import org.eclipse.core.resources.IStorage;
@@ -57,16 +58,15 @@ public class SearcherTest
 	@Test
 	public void testCodeSearches() throws Exception
 	{
-		assertFileMatches("file5.txt", "HTTP_REFERER");
+		assertFileMatches("file5.txt", "HTTP_REFERER", true);
 		assertFileMatches("file5.txt", "HTTP_REFER");
 		assertFileMatches("file5.txt", "attp refered"); // approximate
 		assertFileMatches("file5.txt", "$_POST['HTTP_REFERER']");
 		assertFileMatches("file5.txt", "redirect($_POST['HTTP_REFERER']);");
 		assertFileMatches("file5.txt", "redirect http referer");
 		
-		assertFileMatches("file6.txt", "TOPIC_OF_INTEREST");
+		assertFileMatches("file6.txt", "TOPIC_OF_INTEREST", true);
 		assertFileMatches("file6.1.txt", "\"TOPIC OF INTEREST\"");
-		assertFileMatches("file6.txt", "iNTEReST TOpIc");
 		
 		List<SearchResultDoc> docs = search("TOPIC_OF_INTEREST");
 		assertEquals(1, docs.size()); // contain topic
@@ -94,6 +94,12 @@ public class SearcherTest
 	}
 	
 	@Test
+	public void testMoreCodeSearches() throws Exception
+	{
+		assertFileMatches("file6.txt", "iNTEReST TOpIc");
+	}
+	
+	@Test
 	public void testCamelCaseSearch() throws Exception
 	{
 		assertFileMatches("file12.txt", "mainTopicHandler");
@@ -115,16 +121,18 @@ public class SearcherTest
 		assertFileMatches("file4.xml", "ext:xml");
 		
 		List<SearchResultDoc> docs = search("proj:proj1");
-		assertEquals(11, docs.size());
+		assertEquals(13, docs.size());
 		
 		docs = search("proj:\"proj three\"");
 		assertEquals(3, docs.size());
 	}
 
 	@Test
-	public void testWildcardExcludeFilters()
+	public void testHyphenatedWords() throws Exception
 	{
+		assertFileMatches("file14.txt", "body-css-style", true);
 		
+		assertFileMatches("file13.txt", "body css style", "file14.txt");
 	}
 	
 	private void assertFileMatches(String expectedFile, String searchString, String...otherFiles) throws Exception
@@ -138,6 +146,15 @@ public class SearcherTest
 		{
 			assertEquals(otherFiles[i], docs.get(i+1).getFileName());
 		}
+	}
+	
+	private void assertFileMatches(String expectedFile, String searchString, boolean exact) throws Exception
+	{
+		AtomicBoolean isExact = new AtomicBoolean();
+		List<SearchResultDoc> docs = search(searchString, isExact );
+
+		assertEquals(expectedFile, docs.get(0).getFileName());
+		assertEquals("Exact query comparison failed", exact, isExact.get());
 	}
 	
 	private void indexTestFiles() throws IOException, CoreException 
@@ -163,6 +180,9 @@ public class SearcherTest
 		indexFile(writer, "/path/file11.txt", "pointer->execMethod(); new Main()->test3_mtdDecl();");
 		indexFile(writer, "/path/file12.txt", "public void mainTopicHandler(){ }");
 		
+		indexFile(writer, "/path/file13.txt", "body css style body css style body css style");	
+		indexFile(writer, "/path/file14.txt", "some file with body-css-style ");
+		
 		writer.close();
 	}
 
@@ -180,7 +200,17 @@ public class SearcherTest
 	
 	private List<SearchResultDoc> search(String searchString) throws Exception 
 	{
-		SearchResult res = searcher.search(new SearchQuery(searchString, SearchQuery.UNLIMITED_RESULTS));
+		return search(searchString, null);
+	}
+	
+	private List<SearchResultDoc> search(String searchString, AtomicBoolean isExact) throws Exception 
+	{
+		SearchQuery searchQuery = new SearchQuery(searchString, SearchQuery.UNLIMITED_RESULTS);
+		SearchResult res = searcher.search(searchQuery);
+		
+		if( isExact != null )
+			isExact.set( searchQuery.isExact());
+		
 		return res.getResultDocs();
 	}
 }

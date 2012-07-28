@@ -39,12 +39,12 @@ public class FileAnalyzer extends Analyzer {
 	
 	public TokenStream tokenStream(Reader reader) {
 		
-		TokenStream result = new StandardTokenizer(reader); // splits at ". ", "-", etc.
+		TokenStream result = new StandardTokenizer(reader); // splits at ". ", etc.
 		
-		//result = new SysoFilter(result);
+		// result = new SysoFilter(result);
 
 		result = new WordSplitTokenizer(result); 	// non-alphanumerics
-		result = new DotSplitTokenizer(result); 	// all.package.names
+		result = new DotSplitTokenizer(result); 	// all.package.names, hyphen-separated-words
 		result = new CamelCaseTokenizer(result); 	// CamelCaseIdentifiers
 		
 	    result = new LengthFilter(result, minWordLength, 128);
@@ -58,8 +58,8 @@ public class FileAnalyzer extends Analyzer {
 		return tokenStream(reader);
 	}
 
-	@SuppressWarnings("unused") // used when debugging
-	private static class SysoFilter extends TokenFilter
+	// used when debugging
+	public static class SysoFilter extends TokenFilter
 	{
 		private TermAttribute termAtt;
 		

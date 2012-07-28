@@ -15,7 +15,7 @@ package it.unibz.instasearch.indexing.tokenizers;
 import org.apache.lucene.analysis.TokenStream;
 
 /**
- * Splits words at non-alphanumeric characters
+ * Splits words at non-alphanumeric characters but also returns the full word as a token
  */
 public class DotSplitTokenizer extends TermSplitTokenizer {
 
@@ -28,7 +28,7 @@ public class DotSplitTokenizer extends TermSplitTokenizer {
 
 	@Override
 	public String[] splitTerm(String term) {
-		String[] parts = term.split("[.]");
+		String[] parts = term.split("[.-]");
 		return parts;
 	}
 	
