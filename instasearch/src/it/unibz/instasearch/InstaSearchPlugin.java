@@ -232,11 +232,7 @@ public final class InstaSearchPlugin extends AbstractUIPlugin {
 	public static String getPluginId() {
 		return PLUGIN_ID;
 	}
-	
-	public static String getFeatureId() {
-		return getPluginId() + ".feature";
-	}
-	
+
 	public static String getVersion() {
 		return getBundleHeader(Constants.BUNDLE_VERSION);
 	}

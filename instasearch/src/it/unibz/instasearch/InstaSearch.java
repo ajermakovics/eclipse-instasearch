@@ -50,7 +50,11 @@ public class InstaSearch
 		InstaSearchPlugin.addPreferenceChangeListener(indexer);
 		InstaSearchPlugin.addPreferenceChangeListener(searcher);
 		
-		if( !indexer.isIndexed() || !indexer.isReadable() )
+		String lastVer = InstaSearchPlugin.getDefault().getPreferenceStore().getString("version");
+		String curVer = InstaSearchPlugin.getVersion();
+		InstaSearchPlugin.getDefault().getPreferenceStore().setValue("version", curVer);
+
+		if( !indexer.isIndexed() || !indexer.isReadable() || !curVer.equals(lastVer) )
 			createIndex();
 		else
 			searcher.onIndexUpdate();

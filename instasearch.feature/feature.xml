@@ -6,10 +6,10 @@
       provider-name="Andrejs Jermakovics"
       plugin="it.unibz.instasearch">
 
-   <description url="http://code.google.com/a/eclipselabs.org/p/instasearch/">
+   <description url="https://github.com/ajermakovics/eclipse-instasearch">
       Eclipse plug-in for doing quick search in workspace files using
 a search engine. Shows search results instantly as you type.
-http://code.google.com/a/eclipselabs.org/p/instasearch/
+https://github.com/ajermakovics/eclipse-instasearch
    </description>
 
    <copyright>
@@ -27,30 +27,30 @@ http://www.eclipse.org/org/documents/epl-v10.html
 
    <url>
       <update label="InstaSearch" url="http://code.inf.unibz.it/instasearch/downloads/"/>
-      <discovery label="InstaSearch site" url="http://code.google.com/a/eclipselabs.org/p/instasearch"/>
+      <discovery label="InstaSearch site" url="https://github.com/ajermakovics/eclipse-instasearch"/>
    </url>
 
    <requires>
+      <import plugin="org.eclipse.ui" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.lucene" version="2.9.1" match="equivalent"/>
+      <import plugin="org.apache.lucene.analysis" version="2.9.1" match="equivalent"/>
       <import plugin="org.apache.commons.httpclient"/>
       <import plugin="org.apache.commons.lang"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui.editors"/>
-      <import plugin="org.eclipse.ui.workbench.texteditor" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
       <import plugin="org.eclipse.core.net"/>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.core.resources" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.search"/>
       <import plugin="org.eclipse.jface.text"/>
       <import plugin="org.eclipse.debug.ui"/>
-      <import plugin="org.eclipse.ui" version="3.6.0" match="greaterOrEqual"/>
-      <import plugin="org.apache.lucene" version="2.9.1"/>
-      <import plugin="org.apache.lucene.analysis" version="2.9.1" match="perfect"/>
-      <import plugin="org.apache.lucene.highlighter" version="2.9.1" match="perfect"/>
-      <import plugin="org.apache.lucene.memory" version="2.9.1" match="perfect"/>
-      <import plugin="org.apache.lucene.misc" version="2.9.1" match="perfect"/>
-      <import plugin="org.apache.lucene.queries" version="2.9.1" match="perfect"/>
-      <import plugin="org.apache.lucene.snowball" version="2.9.1" match="perfect"/>
-      <import plugin="org.apache.lucene.spellchecker" version="2.9.1" match="perfect"/>
+      <import plugin="org.apache.lucene.highlighter" version="2.9.1" match="equivalent"/>
+      <import plugin="org.apache.lucene.memory" version="2.9.1" match="equivalent"/>
+      <import plugin="org.apache.lucene.misc" version="2.9.1" match="equivalent"/>
+      <import plugin="org.apache.lucene.queries" version="2.9.1" match="equivalent"/>
+      <import plugin="org.apache.lucene.snowball" version="2.9.1" match="equivalent"/>
+      <import plugin="org.apache.lucene.spellchecker" version="2.9.1" match="equivalent"/>
    </requires>
 
    <plugin
