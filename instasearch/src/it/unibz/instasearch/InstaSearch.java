@@ -60,10 +60,14 @@ public class InstaSearch
 			searcher.onIndexUpdate();
 		
 		int indexUpdateInterval = InstaSearchPlugin.getIntPref(PreferenceConstants.P_INDEX_UPDATE_INTERVAL);
+		boolean indexUpdateEnabled = InstaSearchPlugin.getBoolPref(PreferenceConstants.P_INDEX_UPDATE_ENABLED);
 		
 		indexUpdateJob = new IndexUpdateJob(indexer, searcher);
 		indexUpdateJob.setSystem(true);
-		indexUpdateJob.schedule(indexUpdateInterval);
+		
+		if ((indexUpdateEnabled) && (indexUpdateInterval > 0)){
+			indexUpdateJob.schedule(indexUpdateInterval);
+		}
 		
 		InstaSearchPlugin.addPreferenceChangeListener(indexUpdateJob);
 	}
