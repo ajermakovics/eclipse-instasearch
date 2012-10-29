@@ -42,4 +42,5 @@ public class PreferenceConstants
 	public static final String P_UPDATE_CHECK_DELAY = "updateCheckDelay";
 	public static final String P_TYPING_SEARCH_DELAY = "typingSearchDelay";
 	public static final String P_INDEX_UPDATE_INTERVAL = "indexUpdateInterval";
+	public static final String P_INDEX_UPDATE_ENABLED = "indexUpdateEnabled";
 }

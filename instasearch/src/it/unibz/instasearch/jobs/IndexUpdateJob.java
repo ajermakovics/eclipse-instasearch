@@ -156,6 +156,11 @@ public class IndexUpdateJob extends WorkspaceJob implements SynchronousBundleLis
 			return Status.CANCEL_STATUS;
 		
 		int indexUpdateInterval = InstaSearchPlugin.getIntPref(PreferenceConstants.P_INDEX_UPDATE_INTERVAL);
+		boolean indexUpdateEnabled = InstaSearchPlugin.getBoolPref(PreferenceConstants.P_INDEX_UPDATE_ENABLED);
+		
+		if (!indexUpdateEnabled){
+			return Status.CANCEL_STATUS;
+		}
 		
 		boolean indexed = false;
 		
@@ -165,7 +170,7 @@ public class IndexUpdateJob extends WorkspaceJob implements SynchronousBundleLis
 			InstaSearchPlugin.log(e1);
 		}
 		
-		if( !indexed || changedResources.isEmpty() ) { // not indexed or still indexing
+		if((!indexed || changedResources.isEmpty()) && !monitor.isCanceled()) { // not indexed or still indexing
 			schedule(indexUpdateInterval); // check later
 			return Status.CANCEL_STATUS;
 		}
@@ -217,8 +222,9 @@ public class IndexUpdateJob extends WorkspaceJob implements SynchronousBundleLis
 			returnStatus = Status.CANCEL_STATUS;
 		}
 		
-		if( ! monitor.isCanceled() )
+		if((!monitor.isCanceled() ) && (indexUpdateEnabled)){
 			schedule(indexUpdateInterval);
+		}
 		
 		return returnStatus;
 	}
@@ -248,6 +254,15 @@ public class IndexUpdateJob extends WorkspaceJob implements SynchronousBundleLis
 				IResource res = root.findMember(path);
 				if( res != null )
 					changedResources.put(res, res.getType());// mark excluded as changed for re-indexing
+			}
+		}else if (PreferenceConstants.P_INDEX_UPDATE_ENABLED.equals(prop)){
+			boolean enableFlag = (Boolean)event.getNewValue();
+		
+			if (enableFlag) {
+				int indexUpdateInterval = InstaSearchPlugin.getIntPref(PreferenceConstants.P_INDEX_UPDATE_INTERVAL);
+				// cancel and reschedule job 
+				cancel();
+				schedule(indexUpdateInterval);
 			}
 		}
 	}

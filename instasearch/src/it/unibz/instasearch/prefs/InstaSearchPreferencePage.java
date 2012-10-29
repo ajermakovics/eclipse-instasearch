@@ -25,8 +25,10 @@ import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.jface.preference.PathEditor;
 import org.eclipse.jface.preference.StringButtonFieldEditor;
+import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
@@ -49,6 +51,9 @@ public class InstaSearchPreferencePage
 	implements IWorkbenchPreferencePage {
 
 	public static final String ID = InstaSearchPreferencePage.class.getName();
+	
+	private BooleanFieldEditor periodicReindexEnabled;
+	private IntegerFieldEditor periodicReindexInterval;
 	
 	public InstaSearchPreferencePage() {
 		super(GRID);
@@ -96,6 +101,15 @@ public class InstaSearchPreferencePage
 		String version = InstaSearchPlugin.getVersion();
 		addBoolField(PreferenceConstants.P_CHECK_UPDATES, "Notify about updates (ver. " + version + ")");
 		
+		
+		periodicReindexEnabled = addBoolField(PreferenceConstants.P_INDEX_UPDATE_ENABLED, "Enable Automatic-Reindex");
+		periodicReindexInterval =  new IntegerFieldEditor(PreferenceConstants.P_INDEX_UPDATE_INTERVAL, "Automatic Reindex interval",
+																												getFieldEditorParent());
+		periodicReindexInterval.setValidRange(0, Integer.MAX_VALUE);
+		addField(periodicReindexInterval);
+		
+		
+		
 		addField(new WorkspacePathEditor(PreferenceConstants.P_EXCLUDE_DIRS, "Exclude folders from index", "Select folder to exclude from indexing", getFieldEditorParent()));
 		//new Label(getFieldEditorParent(), SWT.NONE).setText("Note: Folders with Derived flag are excluded");
 		
@@ -107,6 +121,13 @@ public class InstaSearchPreferencePage
 				 PreferencesUtil.createPreferenceDialogOn(getShell(), "org.eclipse.ui.editors.preferencePages.Annotations", null, null).open();
 			}
 		});
+	}
+	
+	@Override
+	protected void initialize(){
+		super.initialize();
+		periodicReindexInterval.setEnabled(periodicReindexEnabled.getBooleanValue(), getFieldEditorParent());
+		
 	}
 
 	@Override
@@ -124,10 +145,15 @@ public class InstaSearchPreferencePage
 	/**
 	 * 
 	 */
-	private void addBoolField(String id, String label)
+	private BooleanFieldEditor addBoolField(String id, String label)
 	{
-		addField(new BooleanFieldEditor(id, label, getFieldEditorParent()));
+		BooleanFieldEditor field = new BooleanFieldEditor(id, label, getFieldEditorParent());
+		addField(field);
+		return field;
 	}
+	
+	
+	
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
@@ -143,6 +169,10 @@ public class InstaSearchPreferencePage
 		if( event.getSource() instanceof FieldEditor ) 
 		{
 			FieldEditor field = (FieldEditor)event.getSource();
+			
+			if (field == periodicReindexEnabled){
+				periodicReindexInterval.setEnabled(periodicReindexEnabled.getBooleanValue(), getFieldEditorParent());
+			}
 			
 			if( PreferenceConstants.P_INDEXABLE_EXTENSIONS.equals(field.getPreferenceName()) 
 					|| PreferenceConstants.P_EXCLUDE_DIRS.equals(field.getPreferenceName()) 

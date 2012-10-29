@@ -55,6 +55,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.P_UPDATE_CHECK_DELAY, 10000);
 		store.setDefault(PreferenceConstants.P_TYPING_SEARCH_DELAY, 200);
 		store.setDefault(PreferenceConstants.P_INDEX_UPDATE_INTERVAL, 60000);
+		store.setDefault(PreferenceConstants.P_INDEX_UPDATE_ENABLED, true);
 		
 		String extensions = getIndexableExtensions();
 		store.setDefault(PreferenceConstants.P_INDEXABLE_EXTENSIONS, extensions);
