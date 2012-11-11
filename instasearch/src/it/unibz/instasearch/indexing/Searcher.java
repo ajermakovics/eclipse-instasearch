@@ -11,8 +11,6 @@
  */
 package it.unibz.instasearch.indexing;
 
-import static it.unibz.instasearch.InstaSearchPlugin.debug;
-import it.unibz.instasearch.InstaSearchPlugin;
 import it.unibz.instasearch.indexing.StorageIndexer.IndexChangeListener;
 import it.unibz.instasearch.indexing.querying.CSVExpander;
 import it.unibz.instasearch.indexing.querying.CurrentProjectSetter;
@@ -34,6 +32,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.prefs.PreferenceChangeEvent;
+import java.util.prefs.PreferenceChangeListener;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.KeywordAnalyzer;
@@ -54,15 +54,12 @@ import org.apache.lucene.search.TopDocCollector;
 import org.apache.lucene.search.highlight.QueryTermExtractor;
 import org.apache.lucene.search.highlight.WeightedTerm;
 import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.FSDirectory;
-import org.eclipse.jface.util.IPropertyChangeListener;
-import org.eclipse.jface.util.PropertyChangeEvent;
 
 /**
  * Searcher for searching the index using SearchQuery
  */
 @SuppressWarnings("deprecation")
-public class Searcher implements IPropertyChangeListener, IndexChangeListener {
+public class Searcher implements PreferenceChangeListener, IndexChangeListener {
 
 	/**  @see QueryParser#setPhraseSlop(int) 	*/
 	private static final int DEFAULT_PHRASE_SLOP = 10;
@@ -94,16 +91,25 @@ public class Searcher implements IPropertyChangeListener, IndexChangeListener {
 
 	private boolean showMatchCounts = true;
 	private boolean fuzzySearchAuto = true;
+	private SearcherConfig config;
 
+	public interface SearcherConfig
+	{
+		boolean getBoolPref(String pref);
+		void log(Exception e);
+		Directory getIndexDir() throws IOException;
+	}
+	
 	/**
 	 * Searcher
 	 */
-	public Searcher() {
-    	initPrefs();
+	public Searcher(SearcherConfig config) {
+		this.config = config;
+		initPrefs();
 	}
 	
 	protected Directory getIndexDir() throws IOException {
-		return FSDirectory.getDirectory(InstaSearchPlugin.getIndexDirLocation(), false); 
+		return config.getIndexDir(); 
 	}
 	
 	private SearchResult searchIndex(SearchQuery searchQuery) throws Exception {
@@ -131,7 +137,7 @@ public class Searcher implements IPropertyChangeListener, IndexChangeListener {
 				
 			} catch(ParseException ignored) {
 				// can have error while typing query, just ignore
-				debug(newSearchString, " - ", ignored.getMessage());
+				//debug(newSearchString, " - ", ignored.getMessage());
 				return null; 
 			}
 		}
@@ -311,7 +317,7 @@ public class Searcher implements IPropertyChangeListener, IndexChangeListener {
 			try {
 				indexSearcher.close();
 			} catch (IOException e) {
-				InstaSearchPlugin.log(e);
+				config.log(e);
 			} finally {
 				indexSearcher = null;
 			}	
@@ -339,7 +345,7 @@ public class Searcher implements IPropertyChangeListener, IndexChangeListener {
 		try {
 			warmup();
 		} catch (Exception e) {
-			InstaSearchPlugin.log(e);
+			config.log(e);
 		}
 	}
 
@@ -365,7 +371,7 @@ public class Searcher implements IPropertyChangeListener, IndexChangeListener {
 		
 		returnQuery = rewriteQuery(searchQuery, prefix, returnQuery);
 		
-		debug("q: ", returnQuery, " - exact ", exact);
+		//debug("q: ", returnQuery, " - exact ", exact);
 		
 		returnQuery = returnQuery.rewrite(reader); // lucene's rewrite (ie expand prefix queries)
 		
@@ -447,7 +453,7 @@ public class Searcher implements IPropertyChangeListener, IndexChangeListener {
 		 * see http://lucene.apache.org/java/2_3_1/api/org/apache/lucene/queryParser/QueryParser.html#setAllowLeadingWildcard%28boolean%29
 		 */
 		queryParser.setAllowLeadingWildcard(true);
-		
+
 		return queryParser.parse(searchString);
 	}
 	
@@ -470,18 +476,18 @@ public class Searcher implements IPropertyChangeListener, IndexChangeListener {
 
 	protected void initPrefs() 
 	{
-		fuzzySearchAuto = InstaSearchPlugin.getBoolPref(PreferenceConstants.P_FUZZY_SEARCH_AUTO);
-    	showMatchCounts = InstaSearchPlugin.getBoolPref(PreferenceConstants.P_SHOW_MATCH_COUNT);
+		fuzzySearchAuto = config.getBoolPref(PreferenceConstants.P_FUZZY_SEARCH_AUTO);
+		showMatchCounts = config.getBoolPref(PreferenceConstants.P_SHOW_MATCH_COUNT);
 	}
-	
-	public void propertyChange(PropertyChangeEvent event) {
-		String prop = event.getProperty();
-		
+
+	public void preferenceChange(PreferenceChangeEvent evt)
+	{
+		String prop = evt.getKey();
+
 		if( PreferenceConstants.P_SHOW_MATCH_COUNT.equals(prop) )
-			showMatchCounts = InstaSearchPlugin.getBoolPref(PreferenceConstants.P_SHOW_MATCH_COUNT);
+			showMatchCounts = config.getBoolPref(PreferenceConstants.P_SHOW_MATCH_COUNT);
 		else if( PreferenceConstants.P_FUZZY_SEARCH_AUTO.equals(prop) )
-			fuzzySearchAuto = InstaSearchPlugin.getBoolPref(PreferenceConstants.P_FUZZY_SEARCH_AUTO);
-    	
+			fuzzySearchAuto = config.getBoolPref(PreferenceConstants.P_FUZZY_SEARCH_AUTO);
 	}
 
 }

@@ -17,20 +17,41 @@ import org.apache.lucene.store.Directory;
 import org.junit.Ignore;
 
 @Ignore
-class TestSearcher extends Searcher
+public class TestSearcher extends Searcher
 {
-	private Directory dir;
-
-	public TestSearcher(Directory dir) {
-		this.dir = dir;
-	}
-	
-	@Override
-	protected Directory getIndexDir() throws IOException {
-		return dir;
+	public TestSearcher(final Directory dir) {
+		super(new TestConfig(dir));
 	}
 	
 	@Override
 	protected void initPrefs() {	
+	}
+	
+	private static class TestConfig implements SearcherConfig
+	{
+		private Directory dir;
+		
+		public TestConfig(Directory d)
+		{
+			this.dir = d;
+		}
+
+		@Override
+		public void log(Exception e)
+		{
+			throw new RuntimeException(e);
+		}
+		
+		@Override
+		public Directory getIndexDir() throws IOException
+		{
+			return dir;
+		}
+		
+		@Override
+		public boolean getBoolPref(String pref)
+		{
+			return false;
+		}
 	}
 }

@@ -77,7 +77,7 @@ public class WorkspaceIndexer extends StorageIndexer implements ISchedulingRule,
 	}
 	
 	@Override
-	protected Directory getIndexDir() throws IOException 
+	public Directory getIndexDir() throws IOException 
 	{
 		return FSDirectory.open(getIndexDirLocation()); // FSDirectory.getDirectory(getIndexDirLocation(), false); 
 	}

@@ -36,7 +36,6 @@ import org.apache.lucene.search.Similarity;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 
 /**
@@ -75,7 +74,7 @@ public class StorageIndexer
 			IndexWriter.unlock(indexDir);
 	}
 
-	protected Directory getIndexDir() throws IOException 
+	public Directory getIndexDir() throws IOException 
 	{
 		if( indexDir == null ) indexDir = new RAMDirectory();
 
@@ -202,9 +201,17 @@ public class StorageIndexer
 	 * @throws IOException
 	 */
 	public void indexStorage(IndexWriter indexWriter, IStorage storage, String projectName,
-			long modificationStamp, String jar) throws CoreException, IOException 
+			long modificationStamp, String jar) throws IOException 
 			{
-		InputStream contents = storage.getContents();
+		InputStream contents;
+		try
+		{
+			contents = storage.getContents();
+		}
+		catch (Exception e)
+		{
+			throw new IOException(e);
+		}
 		BufferedReader isReader = new BufferedReader(new InputStreamReader(contents));
 		IPath fullPath = storage.getFullPath();
 		String ext = fullPath.getFileExtension();
@@ -268,7 +275,6 @@ public class StorageIndexer
 	 * @param projectName 
 	 * @param modificationStamp 
 	 * @param jar 
-	 * @throws CoreException 
 	 * @throws IOException 
 	 */
 	protected void indexStorageWithRetry(final IndexWriter indexWriter, final IStorage storage,

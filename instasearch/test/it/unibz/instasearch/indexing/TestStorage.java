@@ -21,12 +21,12 @@ import org.eclipse.core.runtime.Path;
 import org.junit.Ignore;
 
 @Ignore
-class TestStorage implements IStorage
+public class TestStorage implements IStorage
 {
 	private IPath path;
 	private InputStream contents;
 
-	TestStorage(String fullPath, String contentsText)
+	public TestStorage(String fullPath, String contentsText)
 	{
 		this(fullPath, new ByteArrayInputStream(contentsText.getBytes()));
 	}

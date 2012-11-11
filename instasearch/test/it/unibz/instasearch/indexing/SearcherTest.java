@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.lucene.index.IndexWriter;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -28,15 +28,15 @@ import org.junit.Test;
  */
 public class SearcherTest 
 {
-	private TestSearcher searcher;
-	private StorageIndexer indexer;
+	private static TestSearcher searcher;
+	private static StorageIndexer indexer;
 
-	@Before
-	public void setUp() throws IOException, CoreException
+	@BeforeClass
+	public static void indexStuff() throws IOException, CoreException
 	{
-		this.indexer = new StorageIndexer();
+		indexer = new StorageIndexer();
 		indexTestFiles();
-		this.searcher = new TestSearcher(indexer.getIndexDir());
+		searcher = new TestSearcher(indexer.getIndexDir());
 	}
 	
 	@Test
@@ -157,7 +157,7 @@ public class SearcherTest
 		assertEquals("Exact query comparison failed", exact, isExact.get());
 	}
 	
-	private void indexTestFiles() throws IOException, CoreException 
+	private static void indexTestFiles() throws IOException, CoreException 
 	{	
 		IndexWriter writer = indexer.createIndexWriter(true);
 		
@@ -186,12 +186,12 @@ public class SearcherTest
 		writer.close();
 	}
 
-	private void indexFile(IndexWriter writer, String path, String contents) throws CoreException, IOException 
+	private static void indexFile(IndexWriter writer, String path, String contents) throws CoreException, IOException 
 	{
 		indexFile(writer, path, contents, "proj1");
 	}
 	
-	private void indexFile(IndexWriter writer, String path, String contents, String proj) throws CoreException, IOException 
+	private static void indexFile(IndexWriter writer, String path, String contents, String proj) throws CoreException, IOException 
 	{
 		IStorage file1 = new TestStorage(path, contents);
 		

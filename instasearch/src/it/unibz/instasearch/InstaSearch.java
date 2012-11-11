@@ -11,14 +11,19 @@
  */
 package it.unibz.instasearch;
 
+import it.unibz.instasearch.indexing.Searcher;
+import it.unibz.instasearch.indexing.Searcher.SearcherConfig;
 import it.unibz.instasearch.indexing.WorkspaceIndexer;
 import it.unibz.instasearch.indexing.WorkspaceIndexerJDT;
-import it.unibz.instasearch.indexing.Searcher;
 import it.unibz.instasearch.jobs.DeleteIndexJob;
 import it.unibz.instasearch.jobs.IndexUpdateJob;
 import it.unibz.instasearch.jobs.IndexingJob;
 import it.unibz.instasearch.prefs.PreferenceConstants;
 
+import java.io.IOException;
+
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.FSDirectory;
 import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.jobs.Job;
 
@@ -33,18 +38,19 @@ public class InstaSearch
 	private IndexingJob indexingJob;
 	private IndexUpdateJob indexUpdateJob;
 	
-	InstaSearch() throws Exception {
-		
+	InstaSearch() throws Exception
+	{	
 		try {
 			indexer = new WorkspaceIndexerJDT(); // if have JDT installed, we can index jars
 		} catch(Throwable ignored) { // NoClassDefFoundError
 			// no jdt, nevermind
+			InstaSearchPlugin.debug(ignored);
 		}
 		
 		if( indexer == null ) 
 			indexer = new WorkspaceIndexer(); // create default indexer
-		
-		searcher = new Searcher();
+
+		searcher = new Searcher(getSearcherConfig());
 		indexer.setIndexChangeListener(searcher);
 		
 		InstaSearchPlugin.addPreferenceChangeListener(indexer);
@@ -130,5 +136,30 @@ public class InstaSearch
 			indexUpdateJob.cancel();
 			indexUpdateJob.schedule();
 		}
+	}
+	
+	public SearcherConfig getSearcherConfig()
+	{
+		return new SearcherConfig()
+		{
+			@SuppressWarnings("deprecation")
+			@Override
+			public Directory getIndexDir() throws IOException
+			{
+				return FSDirectory.getDirectory(InstaSearchPlugin.getIndexDirLocation(), false);
+			}
+
+			@Override
+			public boolean getBoolPref(String pref)
+			{
+				return InstaSearchPlugin.getBoolPref(pref);
+			}
+			
+			@Override
+			public void log(Exception e)
+			{
+					InstaSearchPlugin.log(e);
+			}
+		};
 	}
 }

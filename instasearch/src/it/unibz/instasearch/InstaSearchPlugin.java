@@ -11,10 +11,13 @@
  */
 package it.unibz.instasearch;
 
+import it.unibz.instasearch.prefs.PreferenceChangeDelegate;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.prefs.PreferenceChangeListener;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.net.proxy.IProxyService;
@@ -311,8 +314,15 @@ public final class InstaSearchPlugin extends AbstractUIPlugin {
 	{
 		if( plugin != null )
 			plugin.getPreferenceStore().addPropertyChangeListener(listener);
+
 	}
 	
+	public static void addPreferenceChangeListener(final PreferenceChangeListener listener)
+	{
+		if( plugin != null )
+			plugin.getPreferenceStore().addPropertyChangeListener(new PreferenceChangeDelegate(listener));
+	}
+
 	public static void removePreferenceChangeListener(IPropertyChangeListener listener)
 	{
 		if( plugin != null )
