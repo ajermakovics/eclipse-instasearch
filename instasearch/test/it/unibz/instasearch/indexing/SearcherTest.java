@@ -96,7 +96,8 @@ public class SearcherTest
 	@Test
 	public void testMoreCodeSearches() throws Exception
 	{
-		assertFileMatches("file6.txt", "iNTEReST TOpIc");
+		assertFileMatches("file6.1.txt", "iNTEReST TOpIc");
+		assertFileMatches("file15.txt", "\"new MethodClassifier\"");
 	}
 	
 	@Test
@@ -121,7 +122,7 @@ public class SearcherTest
 		assertFileMatches("file4.xml", "ext:xml");
 		
 		List<SearchResultDoc> docs = search("proj:proj1");
-		assertEquals(13, docs.size());
+		assertEquals(15, docs.size());
 		
 		docs = search("proj:\"proj three\"");
 		assertEquals(3, docs.size());
@@ -178,10 +179,12 @@ public class SearcherTest
 		indexFile(writer, "/path/file9.txt", "<handler class=\"id_lTy\" name=\"nm_lTy\"/>");
 		indexFile(writer, "/path/file10.txt", "String s = \"idlTypeForNonGeneratedPorts\";");
 		indexFile(writer, "/path/file11.txt", "pointer->execMethod(); new Main()->test3_mtdDecl();");
-		indexFile(writer, "/path/file12.txt", "public void mainTopicHandler(){ }");
+		indexFile(writer, "/path/file12.txt", "public void mainTopicHandler(){ new MyClass(); }");
 		
 		indexFile(writer, "/path/file13.txt", "body css style body css style body css style");	
 		indexFile(writer, "/path/file14.txt", "some file with body-css-style ");
+		indexFile(writer, "/path/file15.txt", "Assert.assertEquals(\"Setter\", expected (new MethodClassifier) is");
+		indexFile(writer, "/path/file16.txt", "class MethodClassifier() { Integer a = new Integer(1); String s = new String(); } ");
 		
 		writer.close();
 	}
