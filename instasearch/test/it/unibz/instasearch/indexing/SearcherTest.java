@@ -14,6 +14,7 @@ package it.unibz.instasearch.indexing;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -30,6 +31,7 @@ public class SearcherTest
 {
 	private static TestSearcher searcher;
 	private static StorageIndexer indexer;
+	private static int numDocs;
 
 	@BeforeClass
 	public static void indexStuff() throws IOException, CoreException
@@ -97,6 +99,9 @@ public class SearcherTest
 	public void testMoreCodeSearches() throws Exception
 	{
 		assertFileMatches("file6.1.txt", "iNTEReST TOpIc");
+		assertFileMatches("file16.txt", "class MethodClassifier");
+	
+		assertFileMatches("file16.txt", "\"class MethodClassifier\"");
 		assertFileMatches("file15.txt", "\"new MethodClassifier\"");
 	}
 	
@@ -122,7 +127,7 @@ public class SearcherTest
 		assertFileMatches("file4.xml", "ext:xml");
 		
 		List<SearchResultDoc> docs = search("proj:proj1");
-		assertEquals(15, docs.size());
+		assertEquals(16, docs.size());
 		
 		docs = search("proj:\"proj three\"");
 		assertEquals(3, docs.size());
@@ -134,6 +139,18 @@ public class SearcherTest
 		assertFileMatches("file14.txt", "body-css-style", true);
 		
 		assertFileMatches("file13.txt", "body css style", "file14.txt");
+	}
+	
+	@Test
+	public void testModifiedDateSearches() throws Exception
+	{
+		List<SearchResultDoc> found;
+		
+		found = search("modified:\"1 day\"");
+		assertEquals(numDocs, found.size());
+		
+		found = search("modified:today");
+		assertEquals(numDocs, found.size());
 	}
 	
 	private void assertFileMatches(String expectedFile, String searchString, String...otherFiles) throws Exception
@@ -161,7 +178,7 @@ public class SearcherTest
 	private static void indexTestFiles() throws IOException, CoreException 
 	{	
 		IndexWriter writer = indexer.createIndexWriter(true);
-		
+
 		indexFile(writer, "/path/FileWithoutExtension", "a file without an extension");
 		
 		indexFile(writer, "/path/file1.txt", "this is a text file with some unique contents");
@@ -185,7 +202,9 @@ public class SearcherTest
 		indexFile(writer, "/path/file14.txt", "some file with body-css-style ");
 		indexFile(writer, "/path/file15.txt", "Assert.assertEquals(\"Setter\", expected (new MethodClassifier) is");
 		indexFile(writer, "/path/file16.txt", "class MethodClassifier() { Integer a = new Integer(1); String s = new String(); } ");
+		indexFile(writer, "/path/file17.txt", "MethodClassifier(); class Different { static class B; } ");
 		
+		numDocs = writer.numDocs();
 		writer.close();
 	}
 
@@ -197,8 +216,8 @@ public class SearcherTest
 	private static void indexFile(IndexWriter writer, String path, String contents, String proj) throws CoreException, IOException 
 	{
 		IStorage file1 = new TestStorage(path, contents);
-		
-		indexer.indexStorage(writer, file1, proj, System.currentTimeMillis(), null);
+		long time = System.currentTimeMillis() - 1000;
+		indexer.indexStorage(writer, file1, proj, time, null);
 	}
 	
 	private List<SearchResultDoc> search(String searchString) throws Exception 
@@ -214,6 +233,9 @@ public class SearcherTest
 		if( isExact != null )
 			isExact.set( searchQuery.isExact());
 		
+		if( res == null )
+			return Collections.emptyList();
+
 		return res.getResultDocs();
 	}
 }

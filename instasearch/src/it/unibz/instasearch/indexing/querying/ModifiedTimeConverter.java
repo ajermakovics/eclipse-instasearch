@@ -20,9 +20,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.search.NumericRangeQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermQuery;
+import org.apache.lucene.search.TermRangeQuery;
 
 /**
  * Replaces named modified field values with millisecond range queries
@@ -102,7 +102,7 @@ public class ModifiedTimeConverter extends QueryVisitor {
 		switch(interval)
 		{
 		case TODAY:
-			cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE), 0, 0, 0);
+			cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
 			start = cal.getTimeInMillis();
 			break;
 		case YESTERDAY:
@@ -116,9 +116,9 @@ public class ModifiedTimeConverter extends QueryVisitor {
 		}
 		
 		String field = Field.MODIFIED.name().toLowerCase();
-		NumericRangeQuery rangeQuery = NumericRangeQuery.newLongRange(field, start, end, true, true);
+		//NumericRangeQuery rangeQuery = NumericRangeQuery.newLongRange(field, start, end, true, true);
 		
-		return rangeQuery;
+		return new TermRangeQuery(field, "" + start, "" + end, true, true);
 	}
 	
 	private static Interval getIntervalByName(String intervalName)

@@ -229,7 +229,6 @@ public class Searcher implements PreferenceChangeListener, IndexChangeListener {
 				
 				result = searchIndex(searchQuery);
 			}
-				
 		}
 		
 		return result;
@@ -371,9 +370,8 @@ public class Searcher implements PreferenceChangeListener, IndexChangeListener {
 		
 		returnQuery = rewriteQuery(searchQuery, prefix, returnQuery);
 		
-		//debug("q: ", returnQuery, " - exact ", exact);
-		
 		returnQuery = returnQuery.rewrite(reader); // lucene's rewrite (ie expand prefix queries)
+		//System.out.println("q: " + returnQuery + " - exact " + exact);
 		
 		return returnQuery;
 	}
