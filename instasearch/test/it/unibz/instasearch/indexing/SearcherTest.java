@@ -99,10 +99,12 @@ public class SearcherTest
 	public void testMoreCodeSearches() throws Exception
 	{
 		assertFileMatches("file6.1.txt", "iNTEReST TOpIc");
+		assertFileMatches("file16.txt", "\"class MethodClassifier\"");
+		assertFileMatches("file16.txt", "\"class MethodClassifier\"~1");
 		assertFileMatches("file16.txt", "class MethodClassifier");
 	
-		assertFileMatches("file16.txt", "\"class MethodClassifier\"");
 		assertFileMatches("file15.txt", "\"new MethodClassifier\"");
+		assertFilesMatch("class MethodClassifier", false, "file16.txt", "file17.txt");
 	}
 	
 	@Test
@@ -138,7 +140,9 @@ public class SearcherTest
 	{
 		assertFileMatches("file14.txt", "body-css-style", true);
 		
-		assertFileMatches("file13.txt", "body css style", "file14.txt");
+		assertFileMatches("file13.txt", "body css style", true);
+
+		assertFilesMatch("body css style", false, "file13.txt", "file14.txt");
 	}
 	
 	@Test
@@ -153,7 +157,7 @@ public class SearcherTest
 		assertEquals(numDocs, found.size());
 	}
 	
-	private void assertFileMatches(String expectedFile, String searchString, String...otherFiles) throws Exception
+	private void assertFileMatches(String expectedFile, String searchString, String... otherFiles) throws Exception
 	{
 		List<SearchResultDoc> docs = search(searchString);
 		assertEquals(expectedFile, docs.get(0).getFileName());
@@ -166,9 +170,24 @@ public class SearcherTest
 		}
 	}
 	
+	private void assertFilesMatch(String searchString, boolean doExactSearch, String... expectedFiles) throws Exception
+	{
+		AtomicBoolean isExact = new AtomicBoolean(doExactSearch);
+		List<SearchResultDoc> docs = search(searchString, isExact );
+		
+		assertEquals(true, docs.size() >= expectedFiles.length);
+		
+		for(int i = 0; i < expectedFiles.length; i++)
+		{
+			assertEquals(expectedFiles[i], docs.get(i).getFileName());
+		}
+		
+		assertEquals("Query changed exact flag", doExactSearch, isExact.get());
+	}
+	
 	private void assertFileMatches(String expectedFile, String searchString, boolean exact) throws Exception
 	{
-		AtomicBoolean isExact = new AtomicBoolean();
+		AtomicBoolean isExact = new AtomicBoolean(exact);
 		List<SearchResultDoc> docs = search(searchString, isExact );
 
 		assertEquals(expectedFile, docs.get(0).getFileName());
@@ -202,7 +221,7 @@ public class SearcherTest
 		indexFile(writer, "/path/file14.txt", "some file with body-css-style ");
 		indexFile(writer, "/path/file15.txt", "Assert.assertEquals(\"Setter\", expected (new MethodClassifier) is");
 		indexFile(writer, "/path/file16.txt", "class MethodClassifier() { Integer a = new Integer(1); String s = new String(); } ");
-		indexFile(writer, "/path/file17.txt", "MethodClassifier(); class Different { static class B; } ");
+		indexFile(writer, "/path/file17.txt", "MethodClassifier(); main() { class Different { static class B; } }");
 		
 		numDocs = writer.numDocs();
 		writer.close();
@@ -222,16 +241,16 @@ public class SearcherTest
 	
 	private List<SearchResultDoc> search(String searchString) throws Exception 
 	{
-		return search(searchString, null);
+		return search(searchString, new AtomicBoolean(true) );
 	}
 	
 	private List<SearchResultDoc> search(String searchString, AtomicBoolean isExact) throws Exception 
 	{
 		SearchQuery searchQuery = new SearchQuery(searchString, SearchQuery.UNLIMITED_RESULTS);
+		searchQuery.setExact( isExact.get() );
 		SearchResult res = searcher.search(searchQuery);
 		
-		if( isExact != null )
-			isExact.set( searchQuery.isExact());
+		isExact.set( searchQuery.isExact());
 		
 		if( res == null )
 			return Collections.emptyList();

@@ -37,6 +37,7 @@ import java.util.prefs.PreferenceChangeListener;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.KeywordAnalyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.Term;
@@ -54,6 +55,7 @@ import org.apache.lucene.search.TopDocCollector;
 import org.apache.lucene.search.highlight.QueryTermExtractor;
 import org.apache.lucene.search.highlight.WeightedTerm;
 import org.apache.lucene.store.Directory;
+import org.apache.lucene.util.Version;
 
 /**
  * Searcher for searching the index using SearchQuery
@@ -62,7 +64,7 @@ import org.apache.lucene.store.Directory;
 public class Searcher implements PreferenceChangeListener, IndexChangeListener {
 
 	/**  @see QueryParser#setPhraseSlop(int) 	*/
-	private static final int DEFAULT_PHRASE_SLOP = 10;
+	private static final int DEFAULT_PHRASE_SLOP = 0;
 	/** Minimum length of query in characters */
 	public static final int MIN_QUERY_LENGTH = 2;
 	/** Minimum number of characters to be considered a word in indexing */
@@ -383,7 +385,18 @@ public class Searcher implements PreferenceChangeListener, IndexChangeListener {
 	 */
 	private Query createExactQuery(SearchQuery searchQuery) throws ParseException
 	{
-		Query query = parserSearchString(searchQuery.getSearchString(), new KeywordAnalyzer());
+		Query query = null;
+		String searchString = searchQuery.getSearchString();
+		
+		if( searchString.contains(" ") )
+		{
+			if( !searchString.contains("\"") ) searchString = "\"" + searchString + "\"";
+			query = parserSearchString(searchString, new StandardAnalyzer(Version.LUCENE_29));
+		}
+		else
+		{
+			query = parserSearchString(searchString, new KeywordAnalyzer()); // searchstring is one term
+		}
 		
 		VisitableQuery visitableQuery = new VisitableQuery(query);
 		
@@ -441,18 +454,20 @@ public class Searcher implements PreferenceChangeListener, IndexChangeListener {
 
 	private Query parserSearchString(String searchString, Analyzer analyzer) throws ParseException 
 	{
-		QueryParser queryParser = new QueryParser(Field.CONTENTS.toString(), analyzer);
+		QueryParser queryParser = new QueryParser(Version.LUCENE_29, Field.CONTENTS.toString(), analyzer);
 		queryParser.setDefaultOperator(Operator.AND); // all fields required
 		queryParser.setLowercaseExpandedTerms(false);
 		queryParser.setPhraseSlop(DEFAULT_PHRASE_SLOP);
-		
+
 		/*
 		 * Allow words in the query to begin with *
 		 * see http://lucene.apache.org/java/2_3_1/api/org/apache/lucene/queryParser/QueryParser.html#setAllowLeadingWildcard%28boolean%29
 		 */
 		queryParser.setAllowLeadingWildcard(true);
 
-		return queryParser.parse(searchString);
+		Query parsedQuery = queryParser.parse(searchString);
+		
+		return parsedQuery;
 	}
 	
 	/**
