@@ -58,6 +58,6 @@ Authors/Contributors
 ---
 Author:  [Andrejs Jermakovics](http://github.com/ajermakovics)
 
-Contributors:  [Holger Voormann](http://eclipsehowl.wordpress.com/)
+Contributors:  [Holger Voormann](http://eclipsehowl.wordpress.com/), [solganik](https://github.com/solganik)
 
-If you'd like to contribute feel free to get in touch or create a  pull request. 
+If you'd like to contribute feel free to get in touch or create a pull request. 

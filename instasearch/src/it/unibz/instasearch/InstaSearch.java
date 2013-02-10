@@ -143,19 +143,16 @@ public class InstaSearch
 		return new SearcherConfig()
 		{
 			@SuppressWarnings("deprecation")
-			@Override
 			public Directory getIndexDir() throws IOException
 			{
 				return FSDirectory.getDirectory(InstaSearchPlugin.getIndexDirLocation(), false);
 			}
 
-			@Override
 			public boolean getBoolPref(String pref)
 			{
 				return InstaSearchPlugin.getBoolPref(pref);
 			}
 			
-			@Override
 			public void log(Exception e)
 			{
 					InstaSearchPlugin.log(e);

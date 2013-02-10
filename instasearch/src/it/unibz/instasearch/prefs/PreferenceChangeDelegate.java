@@ -14,8 +14,7 @@ public class PreferenceChangeDelegate implements IPropertyChangeListener
 	{
 		this.listener = listener;
 	}
-	
-	@Override
+
 	public void propertyChange(PropertyChangeEvent evt)
 	{
 		listener.preferenceChange(new PreferenceChangeEvent(null, evt.getProperty(), evt.getNewValue().toString()));

@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: InstaSearch
 Bundle-SymbolicName: it.unibz.instasearch;singleton:=true
-Bundle-Version: 1.4.0
+Bundle-Version: 1.5.0
 Bundle-Activator: it.unibz.instasearch.InstaSearchPlugin
-Bundle-DocURL: http://code.google.com/a/eclipselabs.org/p/instasearch/
+Bundle-DocURL: https://github.com/ajermakovics/eclipse-instasearch
 Bundle-UpdateLocation: http://code.inf.unibz.it/instasearch/downloads/ver.php
 ErrorReportURL: http://code.inf.unibz.it/instasearch/downloads/contact/send.php
 Require-Bundle: org.eclipse.ui;bundle-version="3.6.0",
