@@ -38,6 +38,11 @@ public enum Field
 		return new Term(name().toLowerCase(), text);
 	}
 	
+	public static Field fromTerm(Term term)
+	{
+		return getByName(term.field());
+	}
+	
 	/**
 	 * 
 	 * @param fieldName (case insensitive)

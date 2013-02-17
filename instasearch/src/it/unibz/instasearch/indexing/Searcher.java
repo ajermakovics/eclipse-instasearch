@@ -30,8 +30,10 @@ import it.unibz.instasearch.prefs.PreferenceConstants;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.prefs.PreferenceChangeEvent;
 import java.util.prefs.PreferenceChangeListener;
 
@@ -49,6 +51,7 @@ import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.BooleanQuery.TooManyClauses;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocCollector;
@@ -71,6 +74,7 @@ public class Searcher implements PreferenceChangeListener, IndexChangeListener {
 	public static final int MIN_WORD_LENGTH = 1;
 	/** Character that identifies the current project in search query */
 	public static final String CURRENT_PROJECT_CHAR = ".";
+	private static final Version LUCENE_VERSION = Version.LUCENE_29;
 	
 	private IndexSearcher indexSearcher;
 	
@@ -390,8 +394,8 @@ public class Searcher implements PreferenceChangeListener, IndexChangeListener {
 		
 		if( searchString.contains(" ") )
 		{
-			if( !searchString.contains("\"") ) searchString = "\"" + searchString + "\"";
-			query = parserSearchString(searchString, new StandardAnalyzer(Version.LUCENE_29));
+			query = parserSearchString(searchString, new StandardAnalyzer(LUCENE_VERSION));
+			query = convertToPhraseQuery(query);
 		}
 		else
 		{
@@ -406,6 +410,26 @@ public class Searcher implements PreferenceChangeListener, IndexChangeListener {
 		query = visitableQuery.getQuery();
 		
 		return query;
+	}
+
+	private static Query convertToPhraseQuery(Query query)
+	{
+		PhraseQuery phraseQuery = new PhraseQuery();
+		
+		Set<Term> terms = new LinkedHashSet<Term>();
+		query.extractTerms(terms);
+		
+		for(Term term: terms)
+		{
+			Field field = Field.fromTerm(term);
+			
+			if( Field.CONTENTS == field  )
+				phraseQuery.add(term);
+			else
+				return query;
+		}
+		
+		return phraseQuery;
 	}
 
 	private Query rewriteQuery(SearchQuery searchQuery, boolean prefix, Query query) 
@@ -454,7 +478,7 @@ public class Searcher implements PreferenceChangeListener, IndexChangeListener {
 
 	private Query parserSearchString(String searchString, Analyzer analyzer) throws ParseException 
 	{
-		QueryParser queryParser = new QueryParser(Version.LUCENE_29, Field.CONTENTS.toString(), analyzer);
+		QueryParser queryParser = new QueryParser(LUCENE_VERSION, Field.CONTENTS.toString(), analyzer);
 		queryParser.setDefaultOperator(Operator.AND); // all fields required
 		queryParser.setLowercaseExpandedTerms(false);
 		queryParser.setPhraseSlop(DEFAULT_PHRASE_SLOP);

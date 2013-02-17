@@ -103,6 +103,8 @@ public class SearcherTest
 		assertFileMatches("file16.txt", "\"class MethodClassifier\"~1");
 		assertFileMatches("file16.txt", "class MethodClassifier");
 	
+		assertFileMatches("file16.txt", "\"class MethodClassifier\" proj:proj1");
+		
 		assertFileMatches("file15.txt", "\"new MethodClassifier\"");
 		assertFilesMatch("class MethodClassifier", false, "file16.txt", "file17.txt");
 	}
