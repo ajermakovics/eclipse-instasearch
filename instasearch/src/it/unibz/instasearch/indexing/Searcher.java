@@ -417,16 +417,24 @@ public class Searcher implements PreferenceChangeListener, IndexChangeListener {
 		PhraseQuery phraseQuery = new PhraseQuery();
 		
 		Set<Term> terms = new LinkedHashSet<Term>();
-		query.extractTerms(terms);
 		
-		for(Term term: terms)
+		try
 		{
-			Field field = Field.fromTerm(term);
-			
-			if( Field.CONTENTS == field  )
-				phraseQuery.add(term);
-			else
-				return query;
+			query.extractTerms(terms);
+
+			for(Term term: terms)
+			{
+				Field field = Field.fromTerm(term);
+
+				if( Field.CONTENTS == field  )
+					phraseQuery.add(term);
+				else
+					return query;
+			}
+		}
+		catch(UnsupportedOperationException ignored) // not all queries support it 
+		{
+			return query;
 		}
 		
 		return phraseQuery;

@@ -50,9 +50,15 @@ There are also useful [Eclipse Search Tips](https://github.com/ajermakovics/ecli
 
 **Note**: Fuzzy search is started automatically if no exact matches are found
 
-Bugs/Enhancement Requests
+Building and Developing
 ---
-If you notice any issues with the plugin or have an idea for an enhancement, please open a new ticket
+To build you will need Eclipse (3.7+) with Plug-In Development Environment (PDE) installed:
+* Use File -> Import -> Existing Projects to import all instasearch projects
+* To run or debug right click on 'instasearch' project and select Run As -> Eclipse Application
+
+To use the plug-in in existing Eclipse installation do:
+* Right click on instasearch project, Export -> Deployable plug-ins
+* Choose an existing Eclipse installation directory. Restart
 
 Authors/Contributors
 ---
@@ -60,4 +66,4 @@ Author:  [Andrejs Jermakovics](http://github.com/ajermakovics)
 
 Contributors:  [Holger Voormann](http://eclipsehowl.wordpress.com/), [solganik](https://github.com/solganik)
 
-If you'd like to contribute feel free to get in touch or create a pull request. 
+Contributions are very welcome so feel free to get in touch or create a pull request. 

@@ -129,6 +129,8 @@ public class SearcherTest
 		assertFileMatches("FileWithoutExtension", "FileWithoutExt");
 		
 		assertFileMatches("file4.xml", "ext:xml");
+		assertFileMatches("file4.xml", "handler ext:xml");
+		assertFileMatches("file4.xml", "handler MyFirstServer ext:*");
 		
 		List<SearchResultDoc> docs = search("proj:proj1");
 		assertEquals(16, docs.size());

@@ -6,7 +6,7 @@
    <feature url="features/org.apache.lucene_2.9.1.jar" id="org.apache.lucene" version="2.9.1">
       <category name="Apache Lucene (for Eclipse 3.6 Helios)"/>
    </feature>
-   <feature url="features/it.unibz.instasearch.feature.indigo_1.5.1.jar" id="it.unibz.instasearch.feature.indigo" version="1.5.1">
+   <feature url="features/it.unibz.instasearch.feature.indigo_1.5.2.jar" id="it.unibz.instasearch.feature.indigo" version="1.5.2">
       <category name="InstaSearch"/>
    </feature>
    <category-def name="InstaSearch" label="InstaSearch">
