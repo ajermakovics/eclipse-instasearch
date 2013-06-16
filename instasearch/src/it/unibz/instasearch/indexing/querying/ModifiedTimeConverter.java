@@ -16,6 +16,7 @@ import it.unibz.instasearch.indexing.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.math.NumberUtils;
@@ -34,7 +35,7 @@ public class ModifiedTimeConverter extends QueryVisitor {
 	
 	static {
 		for(Interval interval: Interval.values())
-			intervalNames.add(interval.toString().toLowerCase());
+			intervalNames.add(interval.toString().toLowerCase(Locale.ENGLISH));
 		
 		intervalNames.add("3 days"); // as an example, any number can be specified
 	}
@@ -115,7 +116,7 @@ public class ModifiedTimeConverter extends QueryVisitor {
 			start = end - multiplier * interval.millis;
 		}
 		
-		String field = Field.MODIFIED.name().toLowerCase();
+		String field = Field.MODIFIED.name().toLowerCase(Locale.ENGLISH);
 		//NumericRangeQuery rangeQuery = NumericRangeQuery.newLongRange(field, start, end, true, true);
 		
 		return new TermRangeQuery(field, "" + start, "" + end, true, true);

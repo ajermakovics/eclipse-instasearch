@@ -18,15 +18,16 @@ import it.unibz.instasearch.prefs.PreferenceConstants;
 import it.unibz.instasearch.ui.ResultContentProvider.MatchLine;
 
 import java.util.Collection;
+import java.util.Locale;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.StyledString.Styler;
 import org.eclipse.search.ui.text.Match;
 import org.eclipse.swt.graphics.Image;
@@ -105,7 +106,7 @@ class ResultLabelProvider extends LabelProvider implements IStyledLabelProvider,
 		
 		for(String searchTerm: searchTerms) // highlight matches 
 		{
-			int termPos = fileName.toLowerCase().indexOf(searchTerm);
+			int termPos = fileName.toLowerCase(Locale.ENGLISH).indexOf(searchTerm);
 			
 			if( termPos != -1 )
 				str.setStyle(termPos, searchTerm.length(), highlightStyle);
