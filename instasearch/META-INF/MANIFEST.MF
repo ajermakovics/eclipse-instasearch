@@ -36,4 +36,4 @@ Bundle-ClassPath: lib/lucene-highlighter-1.9.1.jar,
 Eclipse-LazyStart: false
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: J2SE-1.6
