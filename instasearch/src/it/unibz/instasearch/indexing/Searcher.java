@@ -34,8 +34,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.prefs.PreferenceChangeEvent;
-import java.util.prefs.PreferenceChangeListener;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.KeywordAnalyzer;
@@ -59,12 +57,14 @@ import org.apache.lucene.search.highlight.QueryTermExtractor;
 import org.apache.lucene.search.highlight.WeightedTerm;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.Version;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 
 /**
  * Searcher for searching the index using SearchQuery
  */
 @SuppressWarnings("deprecation")
-public class Searcher implements PreferenceChangeListener, IndexChangeListener {
+public class Searcher implements IPropertyChangeListener, IndexChangeListener {
 
 	/**  @see QueryParser#setPhraseSlop(int) 	*/
 	private static final int DEFAULT_PHRASE_SLOP = 0;
@@ -525,10 +525,10 @@ public class Searcher implements PreferenceChangeListener, IndexChangeListener {
 		showMatchCounts = config.getBoolPref(PreferenceConstants.P_SHOW_MATCH_COUNT);
 	}
 
-	public void preferenceChange(PreferenceChangeEvent evt)
-	{
-		String prop = evt.getKey();
-
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		String prop = event.getProperty();
+		
 		if( PreferenceConstants.P_SHOW_MATCH_COUNT.equals(prop) )
 			showMatchCounts = config.getBoolPref(PreferenceConstants.P_SHOW_MATCH_COUNT);
 		else if( PreferenceConstants.P_FUZZY_SEARCH_AUTO.equals(prop) )
