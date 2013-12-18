@@ -2,12 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: InstaSearch
 Bundle-SymbolicName: it.unibz.instasearch;singleton:=true
-Bundle-Version: 1.5.2
+Bundle-Version: 1.5.5
 Bundle-Activator: it.unibz.instasearch.InstaSearchPlugin
 Bundle-DocURL: https://github.com/ajermakovics/eclipse-instasearch
 Bundle-UpdateLocation: http://code.inf.unibz.it/instasearch/downloads/ver.php
 ErrorReportURL: http://code.inf.unibz.it/instasearch/downloads/contact/send.php
-Require-Bundle: org.eclipse.ui;bundle-version="3.6.0",
+Require-Bundle: org.eclipse.ui;bundle-version="3.7.0",
  org.apache.lucene;bundle-version="[2.9.1,2.9.2]",
  org.apache.lucene.analysis;bundle-version="[2.9.1,2.9.2)",
  org.apache.commons.httpclient,
@@ -31,9 +31,8 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.6.0",
  org.apache.lucene.snowball;bundle-version="[2.9.1,2.9.2)",
  org.apache.lucene.spellchecker;bundle-version="[2.9.1,2.9.2)"
 Bundle-Vendor: Andrejs Jermakovics
-Bundle-ClassPath: lib/lucene-highlighter-1.9.1.jar,
- .
+Bundle-ClassPath: .
 Eclipse-LazyStart: false
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
