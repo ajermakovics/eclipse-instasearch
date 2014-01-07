@@ -1,6 +1,10 @@
 InstaSearch - Eclipse plug-in for quick code search
 --
 
+<a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1093" title="Drag and drop into a running Eclipse menu area to install InstaSearch">
+  <img src="https://marketplace.eclipse.org/sites/all/modules/custom/marketplace/images/installbutton.png"/>
+</a>
+
 InstaSearch is an  [Eclipse IDE](http://eclipse.org) plug-in for performing quick and advanced search of workspace files. It indexes files using [Lucene](http://lucene.apache.org/core/) and keeps the index up to date automatically. The search is performed instantly as-you-type and resulting files are displayed in an Eclipse view.
 
 Each file then can be previewed using few most matching and relevant lines. A double-click on the match leads to the matching line in the file.
@@ -25,7 +29,7 @@ Main Features
 * Searches JAR source attachments
 * Supports filtering by extension/project/working set
 
-[Screenshot](http://code.inf.unibz.it/instasearch/downloads/images/instasearch_new.jpg) 
+![Screenshot](http://code.inf.unibz.it/instasearch/downloads/images/instasearch_new.jpg) 
 
 Search Tips
 ---
