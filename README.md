@@ -68,6 +68,6 @@ Authors/Contributors
 ---
 Author:  [Andrejs Jermakovics](http://github.com/ajermakovics)
 
-Contributors:  [Holger Voormann](http://eclipsehowl.wordpress.com/), [solganik](https://github.com/solganik)
+Contributors:  [Holger Voormann](http://eclipsehowl.wordpress.com/), [solganik](https://github.com/solganik), [on github](https://github.com/ajermakovics/eclipse-instasearch/graphs/contributors)
 
 Contributions are very welcome so feel free to get in touch or create a pull request. 
