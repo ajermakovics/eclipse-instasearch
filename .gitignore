@@ -1,5 +1,3 @@
-.DS_Store
-*.class
 it.unibz.instasearch/bin/*
 instasearch/.settings/*
 instasearch/bin/*
@@ -7,3 +5,5 @@ instasearch.site/features/*
 instasearch.site/plugins/*
 instasearch.site/artifacts.jar
 instasearch.site/content.jar
+.DS_Store
+*.class

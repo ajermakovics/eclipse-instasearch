@@ -15,7 +15,7 @@ In Eclipse please install using the **Eclipse Marketplace** from the *Help* menu
 
 Alternatively you can install using the update site `http://code.inf.unibz.it/instasearch/downloads/`
 
-Java 1.6 or newer is required
+Java 1.7 or newer is required
 
 ( [Add to favorites](http://marketplace.eclipse.org/content/instasearch) on Eclipse Marketplace.)
 
