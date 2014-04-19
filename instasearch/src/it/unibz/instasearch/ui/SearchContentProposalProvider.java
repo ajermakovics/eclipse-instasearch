@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import org.eclipse.jface.fieldassist.IContentProposal;
 import org.eclipse.jface.fieldassist.SimpleContentProposalProvider;
@@ -55,7 +56,7 @@ class SearchContentProposalProvider extends SimpleContentProposalProvider
 		if( spaceIdx != -1 )
 			fieldName = beforeCol.substring(spaceIdx+1);
 		
-		fieldName = fieldName.toLowerCase();
+		fieldName = fieldName.toLowerCase(Locale.ENGLISH);
 		List<String> proposalNames = null;
 		
 		int commaIdx = curText.lastIndexOf(',');
@@ -66,7 +67,7 @@ class SearchContentProposalProvider extends SimpleContentProposalProvider
 			colIdx = commaIdx;
 		}
 		
-		String prefix = curText.substring(colIdx+1).toLowerCase(); // filtering text
+		String prefix = curText.substring(colIdx+1).toLowerCase(Locale.ENGLISH); // filtering text
 		Field field = Field.getByName(fieldName);
 		
 		if( field == null ) 
@@ -82,7 +83,7 @@ class SearchContentProposalProvider extends SimpleContentProposalProvider
 			addCurrentProjectProposal(rest, beforeCol, prevProposal, proposals);
 		
 		for(String proposalName: proposalNames) {
-			if( proposalName.toLowerCase().startsWith(prefix) ) {
+			if( proposalName.toLowerCase(Locale.ENGLISH).startsWith(prefix) ) {
 				String label = proposalName;
 				proposalName = prevProposal + proposalName;
 				
@@ -154,7 +155,7 @@ class SearchContentProposalProvider extends SimpleContentProposalProvider
 			return EMPTY_PROPOSALS;
 		
 		for(String proposal: proposals) {
-			if( proposal.toLowerCase().startsWith(prefix) ) {
+			if( proposal.toLowerCase(Locale.ENGLISH).startsWith(prefix) ) {
 				String label = proposal;
 				
 				String proposalContent = before + proposal + rest;

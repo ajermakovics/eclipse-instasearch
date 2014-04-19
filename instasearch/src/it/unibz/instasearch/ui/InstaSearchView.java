@@ -24,6 +24,7 @@ import it.unibz.instasearch.ui.ResultContentProvider.MatchLine;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Locale;
 
 import org.eclipse.core.runtime.ILogListener;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -187,7 +188,7 @@ public class InstaSearchView extends ViewPart implements ModifyListener, ILogLis
 	{
 		//TODO: use parser
 		ArrayList<StyleRange> styleRanges = new ArrayList<StyleRange>();
-		String lcaseText = text.toLowerCase();
+		String lcaseText = text.toLowerCase(Locale.ENGLISH);
 		
 		ArrayList<String> fieldsToHighlight = new ArrayList<String>(Field.values().length);
 		for(Field field: Field.values()) // add all field names

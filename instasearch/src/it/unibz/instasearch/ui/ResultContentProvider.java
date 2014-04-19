@@ -14,12 +14,12 @@ package it.unibz.instasearch.ui;
 import it.unibz.instasearch.InstaSearch;
 import it.unibz.instasearch.InstaSearchPlugin;
 import it.unibz.instasearch.indexing.Field;
-import it.unibz.instasearch.indexing.WorkspaceIndexer;
 import it.unibz.instasearch.indexing.SearchQuery;
 import it.unibz.instasearch.indexing.SearchResult;
 import it.unibz.instasearch.indexing.SearchResultDoc;
 import it.unibz.instasearch.indexing.Searcher;
 import it.unibz.instasearch.indexing.StorageIndexer;
+import it.unibz.instasearch.indexing.WorkspaceIndexer;
 import it.unibz.instasearch.prefs.PreferenceConstants;
 
 import java.io.IOException;
@@ -34,6 +34,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -258,7 +259,7 @@ class ResultContentProvider implements ITreeContentProvider {
 		int maxMatches = InstaSearchPlugin.getIntPref(PreferenceConstants.P_SHOWN_LINES_COUNT);
 		List<MatchLine> matchedLines = new ArrayList<MatchLine>();
 		int matchCount = doc.getMatchCount();
-		String searchString = currentSearchQuery.getSearchString().toLowerCase();
+		String searchString = currentSearchQuery.getSearchString().toLowerCase(Locale.ENGLISH);
 		
 		IStorage f = getStorage(doc);
 		if( f == null ) {
@@ -351,7 +352,7 @@ class ResultContentProvider implements ITreeContentProvider {
 	private float addMatches(MatchLine matchLine, Map<String, List<Integer>> terms, 
 			Set<String> matchedTerms, String searchString) {
 		
-		String lcaseLine = matchLine.getLine().toLowerCase();
+		String lcaseLine = matchLine.getLine().toLowerCase(Locale.ENGLISH);
 		
 		if( !matchedTerms.contains(searchString) && !currentSearchQuery.isFuzzy() ) { // check for exact match on the line
 			
@@ -478,10 +479,10 @@ class ResultContentProvider implements ITreeContentProvider {
 	{
 		List<String> ucaseProposals = searcher.getProposals(prefix.toUpperCase(), field);
 		
-		if( prefix.toUpperCase().equals(prefix.toLowerCase()))
+		if( prefix.toUpperCase().equals(prefix.toLowerCase(Locale.ENGLISH)))
 			return ucaseProposals;
 		
-		List<String> lcaseProposals = searcher.getProposals(prefix.toLowerCase(), field);
+		List<String> lcaseProposals = searcher.getProposals(prefix.toLowerCase(Locale.ENGLISH), field);
 		
 		ucaseProposals.addAll(lcaseProposals);
 		Collections.sort(ucaseProposals, String.CASE_INSENSITIVE_ORDER);

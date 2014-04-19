@@ -15,6 +15,7 @@ import it.unibz.instasearch.InstaSearchPlugin;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Locale;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
@@ -72,7 +73,7 @@ public class SearchResultDoc {
 		if( StorageIndexer.NO_VALUE.equals(jarField) )
 			return false;
 		
-		if( jarField.toLowerCase().endsWith(".jar") )
+		if( jarField.toLowerCase(Locale.ENGLISH).endsWith(".jar") )
 			return true;
 		
 		return false;

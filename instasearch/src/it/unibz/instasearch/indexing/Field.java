@@ -1,5 +1,7 @@
 package it.unibz.instasearch.indexing;
 
+import java.util.Locale;
+
 import org.apache.lucene.index.Term;
 
 /** 
@@ -35,7 +37,7 @@ public enum Field
 	 * @return Term
 	 */
 	public Term createTerm(String text) {
-		return new Term(name().toLowerCase(), text);
+		return new Term(name().toLowerCase(Locale.ENGLISH), text);
 	}
 	
 	public static Field fromTerm(Term term)
@@ -58,6 +60,6 @@ public enum Field
 	}
 	
 	public String toString() { 
-		return name().toLowerCase();
+		return name().toLowerCase(Locale.ENGLISH);
 	}
 }

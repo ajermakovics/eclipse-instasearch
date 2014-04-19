@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import org.apache.lucene.index.IndexReader;
@@ -191,7 +192,7 @@ public class WorkspaceIndexer extends StorageIndexer implements ISchedulingRule,
 		if( extensions.length == 0 ) return null;
 		
 		for(int i = 0; i<extensions.length; i++) {
-			String ext = extensions[i].toLowerCase().trim();
+			String ext = extensions[i].toLowerCase(Locale.ENGLISH).trim();
 			if( ext.startsWith("*") ) ext = ext.substring(1);
 			if( ext.startsWith(".") ) ext = ext.substring(1);
 			extensions[i] = ext;
@@ -226,7 +227,7 @@ public class WorkspaceIndexer extends StorageIndexer implements ISchedulingRule,
 		if( ext == null || "".equals(ext) ) 
 			return indexEmptyExtension;
 		
-		if( Arrays.binarySearch(fileExtensions, ext.toLowerCase()) >= 0 )
+		if( Arrays.binarySearch(fileExtensions, ext.toLowerCase(Locale.ENGLISH)) >= 0 )
 			return true;
 		
 		return false;

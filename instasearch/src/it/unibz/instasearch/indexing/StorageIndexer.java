@@ -20,6 +20,7 @@ import java.io.StringReader;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.lucene.analysis.TokenStream;
@@ -36,6 +37,7 @@ import org.apache.lucene.search.Similarity;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 
 /**
@@ -223,7 +225,7 @@ public class StorageIndexer
 		doc.add(createLuceneField(Field.FILE, 		fullPath.toString()));
 		doc.add(createLuceneField(Field.PROJ, 		projectName));
 		doc.add(createLuceneField(Field.NAME, 		fullPath.lastSegment()));
-		doc.add(createLuceneField(Field.EXT, 		ext.toLowerCase()));
+		doc.add(createLuceneField(Field.EXT, 		ext.toLowerCase(Locale.ENGLISH)));
 		doc.add(createLuceneField(Field.MODIFIED, 	Long.toString(modificationStamp)));
 		doc.add(createLuceneField(Field.JAR, 		(jar==null)?NO_VALUE:jar));
 
@@ -360,7 +362,7 @@ public class StorageIndexer
 		
 		while(tokenStream.incrementToken())
 		{
-			String termText = termAtt.term().toLowerCase();// t.termText().toLowerCase();
+			String termText = termAtt.term().toLowerCase(Locale.ENGLISH);// t.termText().toLowerCase(Locale.ENGLISH);
 			int offset = offsetAtt.startOffset();
 			
 			List<Integer> offsets = terms.get(termText);

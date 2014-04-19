@@ -13,6 +13,8 @@ package it.unibz.instasearch.indexing.querying;
 
 import it.unibz.instasearch.indexing.Field;
 
+import java.util.Locale;
+
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.PrefixQuery;
@@ -36,7 +38,7 @@ public class LowercaseConverter extends QueryVisitor {
 		if( field == Field.CONTENTS  )
 		{
 			Term term = termQuery.getTerm();
-			return new TermQuery(field.createTerm( term.text().toLowerCase() ));
+			return new TermQuery(field.createTerm( term.text().toLowerCase(Locale.ENGLISH) ));
 		}
 			
 		return termQuery;
@@ -48,7 +50,7 @@ public class LowercaseConverter extends QueryVisitor {
 		if( field == Field.CONTENTS  ) 
 		{
 			Term term = prefixQuery.getPrefix();
-			return new PrefixQuery( field.createTerm( term.text().toLowerCase() ) );
+			return new PrefixQuery( field.createTerm( term.text().toLowerCase(Locale.ENGLISH) ) );
 		}
 		
 		return super.visit(prefixQuery, field);
@@ -59,7 +61,7 @@ public class LowercaseConverter extends QueryVisitor {
 		if( field == Field.CONTENTS  ) 
 		{
 			Term term = wildcardQuery.getTerm();
-			return new WildcardQuery( field.createTerm( term.text().toLowerCase() ) );
+			return new WildcardQuery( field.createTerm( term.text().toLowerCase(Locale.ENGLISH) ) );
 		}
 		return super.visit(wildcardQuery, field);
 	}
@@ -75,7 +77,7 @@ public class LowercaseConverter extends QueryVisitor {
 			if( field != Field.CONTENTS )
 				return phraseQuery;
 			
-			Term newTerm = Field.CONTENTS.createTerm( term.text().toLowerCase() );
+			Term newTerm = Field.CONTENTS.createTerm( term.text().toLowerCase(Locale.ENGLISH) );
 			newQuery.add( newTerm );
 		}
 		
