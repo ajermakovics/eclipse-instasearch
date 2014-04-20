@@ -11,7 +11,7 @@ Each file then can be previewed using few most matching and relevant lines. A do
 
 Download / Installation
 --
-In Eclipse please install using the **Eclipse Marketplace** from the *Help* menu ([how-to](http://marketplace.eclipse.org/updatesite/help?url=http://dl.bintray.com/ajermakovics/InstaSearch/))
+In Eclipse please install using the **Eclipse Marketplace** from the *Help* menu ([how-to](http://marketplace.eclipse.org/marketplace-client-intro))
 
 Alternatively you can install using the update site `http://dl.bintray.com/ajermakovics/InstaSearch/`
 
