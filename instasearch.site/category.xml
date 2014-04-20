@@ -3,20 +3,12 @@
    <description name="InstaSearch Update Site" url="http://dl.bintray.com/ajermakovics/InstaSearch/">
       InstaSearch Eclipse Plug-in Update Site
    </description>
-   <feature url="features/org.apache.lucene_2.9.1.jar" id="org.apache.lucene" version="2.9.1">
-      <category name="Apache Lucene (for Eclipse 3.6 Helios)"/>
-   </feature>
    <feature url="features/it.unibz.instasearch.feature.indigo_1.5.6.jar" id="it.unibz.instasearch.feature.indigo" version="1.5.6">
       <category name="InstaSearch"/>
    </feature>
    <category-def name="InstaSearch" label="InstaSearch">
       <description>
          InstaSearch Plug-in
-      </description>
-   </category-def>
-   <category-def name="Apache Lucene (for Eclipse 3.6 Helios)" label="Apache Lucene (for Eclipse 3.6 Helios)">
-      <description>
-         Apache Lucene 2.9.1 for Eclipse 3.6 Helios
       </description>
    </category-def>
 </site>

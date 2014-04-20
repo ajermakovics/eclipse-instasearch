@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <version>1.5.6</version>
+  <artifactId>it.unibz.instasearch.feature.indigo</artifactId>
+  <packaging>eclipse-feature</packaging>
+  
+  <parent>
+		<groupId>ajermakovics</groupId>
+		<artifactId>instasearch</artifactId>
+		<version>1.5.6-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+</project> 

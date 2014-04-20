@@ -31,6 +31,11 @@
 			<type>1</type>
 			<locationURI>UP/README.md</locationURI>
 		</link>
+		<link>
+			<name>root_pom.xml</name>
+			<type>1</type>
+			<location>/Users/ajermakovics/Workspace/eclipse-instasearch/pom.xml</location>
+		</link>
 	</linkedResources>
 	<variableList>
 		<variable>

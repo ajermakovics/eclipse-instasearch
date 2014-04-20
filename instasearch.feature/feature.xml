@@ -2,7 +2,7 @@
 <feature
       id="it.unibz.instasearch.feature.indigo"
       label="InstaSearch"
-      version="1.5.5"
+      version="1.5.6"
       provider-name="Andrejs Jermakovics"
       plugin="it.unibz.instasearch">
 
@@ -26,7 +26,7 @@ http://www.eclipse.org/org/documents/epl-v10.html
    </license>
 
    <url>
-      <update label="InstaSearch" url="http://code.inf.unibz.it/instasearch/downloads/"/>
+      <update label="InstaSearch" url="http://dl.bintray.com/ajermakovics/InstaSearch/"/>
       <discovery label="InstaSearch site" url="https://github.com/ajermakovics/eclipse-instasearch"/>
    </url>
 
