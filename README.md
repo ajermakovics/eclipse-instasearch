@@ -56,7 +56,12 @@ There are also useful [Eclipse Search Tips](https://github.com/ajermakovics/ecli
 
 Building and Developing
 ---
-To build you will need Eclipse (3.7+) with Plug-In Development Environment (PDE) installed:
+
+Build using Maven from project root:
+
+    `mvn install`
+
+To develop you will need Eclipse (3.7+) with Plug-In Development Environment (PDE) installed:
 * Use File -> Import -> Existing Projects to import all instasearch projects
 * To run or debug right click on 'instasearch' project and select Run As -> Eclipse Application
 
