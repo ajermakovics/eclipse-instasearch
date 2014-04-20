@@ -7,3 +7,4 @@ instasearch.site/artifacts.jar
 instasearch.site/content.jar
 .DS_Store
 *.class
+target/
