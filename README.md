@@ -59,7 +59,7 @@ Building and Developing
 
 Build using Maven from project root:
 
-    `mvn install`
+    mvn install
 
 To develop you will need Eclipse (3.7+) with Plug-In Development Environment (PDE) installed:
 * Use File -> Import -> Existing Projects to import all instasearch projects
