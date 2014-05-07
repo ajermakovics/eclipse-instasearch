@@ -1,47 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>InstaSearch Eclipse plug-in by ajermakovics</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <title>InstaSearch Eclipse plug-in by ajermakovics</title>
   </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>InstaSearch Eclipse plug-in</h1>
-        <p>Eclipse plug-in for fast code search</p>
-        <p class="view"><a href="https://github.com/ajermakovics/eclipse-instasearch">View the Project on GitHub <small>ajermakovics/eclipse-instasearch</small></a></p>
-        <ul>
-          <li><a href="https://github.com/ajermakovics/eclipse-instasearch/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/ajermakovics/eclipse-instasearch/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/ajermakovics/eclipse-instasearch">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>InstaSearch - Eclipse plug-in for quick code search</h1>
 
-<p>InstaSearch is an  Eclipse plug-in for performing quick and advanced search of workspace files. It indexes files using <a href="http://lucene.apache.org/core/">Lucene</a> and keeps the index up to date automatically. The search is performed instantly as-you-type and resulting files are displayed in an Eclipse view.</p>
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>InstaSearch Eclipse plug-in</h1>
+          <h2>Eclipse plug-in for fast code search</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/ajermakovics/eclipse-instasearch/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/ajermakovics/eclipse-instasearch/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/ajermakovics/eclipse-instasearch" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h2>
+<a name="instasearch---eclipse-plug-in-for-quick-code-search" class="anchor" href="#instasearch---eclipse-plug-in-for-quick-code-search"><span class="octicon octicon-link"></span></a>InstaSearch - Eclipse plug-in for quick code search</h2>
+
+<p><a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1093" title="Drag and drop into a running Eclipse menu area to install InstaSearch">
+  <img src="https://marketplace.eclipse.org/sites/all/modules/custom/marketplace/images/installbutton.png"></a></p>
+
+<p>InstaSearch is an  <a href="http://eclipse.org">Eclipse IDE</a> plug-in for performing quick and advanced search of workspace files. It indexes files using <a href="http://lucene.apache.org/core/">Lucene</a> and keeps the index up to date automatically. The search is performed instantly as-you-type and resulting files are displayed in an Eclipse view.</p>
 
 <p>Each file then can be previewed using few most matching and relevant lines. A double-click on the match leads to the matching line in the file.</p>
 
-<h2>Download / Installation</h2>
+<h2>
+<a name="download--installation" class="anchor" href="#download--installation"><span class="octicon octicon-link"></span></a>Download / Installation</h2>
 
-<p>In Eclipse Helios (3.6) or Indigo (3.7) please install using the <strong>Eclipse Marketplace</strong> from the <em>Help</em> menu (<a href="http://marketplace.eclipse.org/updatesite/help?url=http://code.inf.unibz.it/instasearch/downloads/">how-to</a>)</p>
+<p>In Eclipse please install using the <strong>Eclipse Marketplace</strong> from the <em>Help</em> menu (<a href="http://marketplace.eclipse.org/marketplace-client-intro">how-to</a>)</p>
 
-<p>Alternatively you can install using the update site <code>http://code.inf.unibz.it/instasearch/downloads/</code></p>
+<p>Alternatively you can install using the update site <code>http://dl.bintray.com/ajermakovics/InstaSearch/</code></p>
 
-<p>Java 1.5 or newer is required</p>
+<p>Java 1.7 or newer is required</p>
 
 <p>( <a href="http://marketplace.eclipse.org/content/instasearch">Add to favorites</a> on Eclipse Marketplace.)</p>
 
-<h2>Main Features</h2>
+<h2>
+<a name="main-features" class="anchor" href="#main-features"><span class="octicon octicon-link"></span></a>Main Features</h2>
 
 <ul>
 <li>Instantly shows search results</li>
@@ -51,10 +63,10 @@
 <li>Opens and highlights matches in files</li>
 <li>Searches JAR source attachments</li>
 <li>Supports filtering by extension/project/working set</li>
-</ul><p>Screenshot:
-<img src="http://code.inf.unibz.it/instasearch/downloads/images/instasearch_new.jpg" alt="Screenshot"></p>
+</ul><p><img src="https://marketplace.eclipse.org/sites/default/files/instasearch_new.jpg" alt="Screenshot"></p>
 
-<h2>Search Tips</h2>
+<h2>
+<a name="search-tips" class="anchor" href="#search-tips"><span class="octicon octicon-link"></span></a>Search Tips</h2>
 
 <p>Lucene <a href="http://lucene.apache.org/core/old_versioned_docs/versions/3_0_0/queryparsersyntax.html">query syntax</a> can be used for searching. This includes:</p>
 
@@ -97,28 +109,53 @@
 </ul>
 </li>
 </ul><p>To exclude some folders from search indexing, mark them as <em>Derived</em> in the folder's properties.
-There are also useful Eclipse Search Tips.</p>
+There are also useful <a href="https://github.com/ajermakovics/eclipse-instasearch/wiki/Eclipse-search-tips">Eclipse Search Tips</a>.</p>
 
 <p><strong>Note</strong>: Fuzzy search is started automatically if no exact matches are found</p>
 
-<h2>Bugs/Enhancement Requests</h2>
+<h2>
+<a name="building-and-developing" class="anchor" href="#building-and-developing"><span class="octicon octicon-link"></span></a>Building and Developing</h2>
 
-<p>If you notice any issues with the plugin or have an idea for an enhancement, please open a new ticket</p>
+<p>Build using Maven from project root:</p>
 
-<h2>Authors/Contributors</h2>
+<pre><code>mvn install
+</code></pre>
+
+<p>To develop you will need Eclipse (3.7+) with Plug-In Development Environment (PDE) installed:</p>
+
+<ul>
+<li>Use File -&gt; Import -&gt; Existing Projects to import all instasearch projects</li>
+<li>To run or debug right click on 'instasearch' project and select Run As -&gt; Eclipse Application</li>
+</ul><p>To use the plug-in in existing Eclipse installation do:</p>
+
+<ul>
+<li>Right click on instasearch project, Export -&gt; Deployable plug-ins</li>
+<li>Choose an existing Eclipse installation directory. Restart</li>
+</ul><h2>
+<a name="authorscontributors" class="anchor" href="#authorscontributors"><span class="octicon octicon-link"></span></a>Authors/Contributors</h2>
 
 <p>Author:  <a href="http://github.com/ajermakovics">Andrejs Jermakovics</a></p>
 
-<p>Contributors:  <a href="http://eclipsehowl.wordpress.com/">Holger Voormann</a></p>
+<p>Contributors:  <a href="http://eclipsehowl.wordpress.com/">Holger Voormann</a>, <a href="https://github.com/solganik">solganik</a>, <a href="https://github.com/ajermakovics/eclipse-instasearch/graphs/contributors">on github</a></p>
 
-<p>If you'd like to contribute feel free to get in touch or create a  pull request. </p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/ajermakovics">ajermakovics</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+<p>Contributions are very welcome so feel free to get in touch or create a pull request. </p>
+
+<h2>
+<a name="acknowledgements" class="anchor" href="#acknowledgements"><span class="octicon octicon-link"></span></a>Acknowledgements</h2>
+
+<p>YourKit is supporting InstaSearch open source project with its full-featured Java Profiler.<br>
+YourKit, LLC is the creator of innovative and intelligent tools for profiling<br>
+Java and .NET applications. Take a look at YourKit's leading software products:<br><a href="http://www.yourkit.com/java/profiler/index.jsp">YourKit Java Profiler</a> and
+<a href="http://www.yourkit.com/.net/profiler/index.jsp">YourKit .NET Profiler</a>.  </p>
+        </section>
+
+        <footer>
+          InstaSearch Eclipse plug-in is maintained by <a href="https://github.com/ajermakovics">ajermakovics</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
   </body>
 </html>
