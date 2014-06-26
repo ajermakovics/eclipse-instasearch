@@ -102,7 +102,7 @@ public class InstaSearchPreferencePage
 		
 		
 		periodicReindexEnabled = addBoolField(PreferenceConstants.P_INDEX_UPDATE_ENABLED, "Enable Automatic-Reindex");
-		periodicReindexInterval =  new IntegerFieldEditor(PreferenceConstants.P_INDEX_UPDATE_INTERVAL, "Automatic Reindex interval",
+		periodicReindexInterval =  new IntegerFieldEditor(PreferenceConstants.P_INDEX_UPDATE_INTERVAL, "Automatic Reindex interval (ms)",
 																												getFieldEditorParent());
 		periodicReindexInterval.setValidRange(0, Integer.MAX_VALUE);
 		addField(periodicReindexInterval);
