@@ -29,7 +29,7 @@ Main Features
 * Searches JAR source attachments
 * Supports filtering by extension/project/working set
 
-![Screenshot](https://marketplace.eclipse.org/sites/default/files/instasearch_new.jpg) 
+![Screenshot](https://raw.githubusercontent.com/ajermakovics/eclipse-instasearch/gh-pages/images/instasearch_new.jpg) 
 
 Search Tips
 ---
