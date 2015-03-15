@@ -6,10 +6,10 @@
   <packaging>eclipse-feature</packaging>
   
   <parent>
-		<groupId>ajermakovics</groupId>
-		<artifactId>instasearch</artifactId>
-		<version>1.5.6-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
+	<groupId>ajermakovics</groupId>
+	<artifactId>instasearch</artifactId>
+	<version>1.5.6-SNAPSHOT</version>
+	<relativePath>../pom.xml</relativePath>
+  </parent>
 
 </project> 
