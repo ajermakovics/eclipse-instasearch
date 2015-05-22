@@ -191,13 +191,12 @@ public class WorkspaceIndexerJDT extends WorkspaceIndexer {
 				if( classFile.getElementName().contains("$") ) continue; // not type root
 				
 				try {
-                    ClassFileSourceStorage classFileSourceStorage = new ClassFileSourceStorage(classFile);
-                    
-                    if( classFileSourceStorage.hasSource() )
-                    	indexStorageWithRetry(indexWriter, classFileSourceStorage, projectPath, IResource.NULL_STAMP, jarName);
-                } catch (Exception e) {
-                    //Issue #69. Avoid Ex where Eclipse has trouble loading a source file. 
-                }
+					ClassFileSourceStorage classFileSourceStorage = new ClassFileSourceStorage(classFile);
+
+					if (classFileSourceStorage.hasSource()) indexStorageWithRetry(indexWriter, classFileSourceStorage, projectPath, IResource.NULL_STAMP, jarName);
+				} catch (Exception e) {
+					//Issue #69. Avoid Ex where Eclipse has trouble loading a source file.
+				}
 				
 				if( monitor.isCanceled() ) return;
 			}
