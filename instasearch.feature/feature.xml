@@ -2,7 +2,7 @@
 <feature
       id="it.unibz.instasearch.feature.indigo"
       label="InstaSearch"
-      version="1.5.6"
+      version="1.5.7.qualifier"
       provider-name="Andrejs Jermakovics"
       plugin="it.unibz.instasearch">
 
