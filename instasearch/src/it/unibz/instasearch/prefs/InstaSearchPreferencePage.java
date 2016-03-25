@@ -88,7 +88,7 @@ public class InstaSearchPreferencePage
 		
 		addBoolField(PreferenceConstants.P_INDEX_EMPTY_EXTENSION, "Index files without extension");
 		
-		BooleanFieldEditor indexJars = new BooleanFieldEditor(PreferenceConstants.P_INDEX_ARCHIVES, "Index JAR Source Attachements (beta)", getFieldEditorParent());
+		BooleanFieldEditor indexJars = new BooleanFieldEditor(PreferenceConstants.P_INDEX_ARCHIVES, "Index JAR Source Attachements (beta, requires to re-build the index after enabling)", getFieldEditorParent());
 		addField(indexJars);
 		indexJars.setEnabled(false, getFieldEditorParent());
 		
