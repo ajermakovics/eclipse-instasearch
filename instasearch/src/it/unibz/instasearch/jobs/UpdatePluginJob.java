@@ -39,6 +39,8 @@ public class UpdatePluginJob extends WorkspaceJob
 	{
 		super("InstaSearch Update");
 		
+		setPriority(DECORATE);
+		
 		setProperty(IProgressConstants.ICON_PROPERTY, InstaSearchPlugin.getImageDescriptor("update"));
 		setProperty(IProgressConstants.NO_IMMEDIATE_ERROR_PROMPT_PROPERTY, Boolean.TRUE);
 	}

@@ -40,6 +40,8 @@ public class DeleteIndexJob extends WorkspaceJob
 		this.indexer = indexer;
 		setRule(indexer);
 		
+		setPriority(DECORATE);
+		
 		setProperty(IProgressConstants.NO_IMMEDIATE_ERROR_PROMPT_PROPERTY, Boolean.TRUE);
 		setProperty(IProgressConstants.ICON_PROPERTY, 
 				InstaSearchPlugin.getImageDescriptor("delete"));
