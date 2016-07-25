@@ -30,6 +30,7 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.StyledString.Styler;
 import org.eclipse.search.ui.text.Match;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.ISharedImages;
@@ -38,9 +39,7 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
 
 class ResultLabelProvider extends LabelProvider implements IStyledLabelProvider, IPropertyChangeListener {
 	
-	/**
-	 * 
-	 */
+    private static final String ECLIPSE_SEARCH_UI_MATCH_HIGHLIGHT = "org.eclipse.search.ui.match.highlight";
 	private static final String HIGHLIGHT_COLOR_NAME = "it.unibz.instasearch.ui.HighlightColor";
 	private static final String IMG_OBJ_TEXT_SEARCH_LINE = "org.eclipse.search.ui.line_match";
 	private static final String MORE_RESULTS_LABEL = "More...";
@@ -58,7 +57,9 @@ class ResultLabelProvider extends LabelProvider implements IStyledLabelProvider,
 	private boolean showFullPath;
 	
 	public ResultLabelProvider(ResultContentProvider contentProvider) {
-		JFaceResources.getColorRegistry().put(HIGHLIGHT_COLOR_NAME, new RGB(206, 204, 247));
+	    Color searchColor = JFaceResources.getColorRegistry().get(ECLIPSE_SEARCH_UI_MATCH_HIGHLIGHT);
+	    
+		JFaceResources.getColorRegistry().put(HIGHLIGHT_COLOR_NAME, (searchColor!=null?searchColor.getRGB():new RGB(206, 204, 247)));
 		
 		this.labelProvider = new WorkbenchLabelProvider();
 		this.highlightStyle = StyledString.createColorRegistryStyler(null, HIGHLIGHT_COLOR_NAME);
