@@ -32,6 +32,8 @@ public class IndexingJob extends WorkspaceJob {
 		
 		setRule(indexer);
 		
+		setPriority(DECORATE);
+		
 		setProperty(IProgressConstants.ICON_PROPERTY, InstaSearchPlugin.getImageDescriptor("binary")); 
 		setProperty(IProgressConstants.NO_IMMEDIATE_ERROR_PROMPT_PROPERTY, Boolean.TRUE);
 	}

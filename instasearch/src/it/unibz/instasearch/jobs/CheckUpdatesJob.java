@@ -56,6 +56,8 @@ public class CheckUpdatesJob extends WorkspaceJob
 	{
 		super("InstaSearch Update Check");
 		
+		setPriority(DECORATE);
+		
 		setProperty(IProgressConstants.ICON_PROPERTY, 
 				InstaSearchPlugin.getImageDescriptor("update"));
 		

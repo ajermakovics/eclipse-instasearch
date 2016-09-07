@@ -73,6 +73,8 @@ public class IndexUpdateJob extends WorkspaceJob implements SynchronousBundleLis
 		
 		setRule(indexer);
 		
+		setPriority(DECORATE);
+		
 		setProperty(IProgressConstants.ICON_PROPERTY, InstaSearchPlugin.getImageDescriptor("syncdb")); 
 		setProperty(IProgressConstants.NO_IMMEDIATE_ERROR_PROMPT_PROPERTY, Boolean.TRUE);
 	}
