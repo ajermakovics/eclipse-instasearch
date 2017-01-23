@@ -17,7 +17,7 @@ Alternatively you can install using the update site `http://dl.bintray.com/ajerm
 
 Java 1.7 or newer is required
 
-( [Add to favorites](http://marketplace.eclipse.org/content/instasearch) on Eclipse Marketplace.)
+([Add to favorites](http://marketplace.eclipse.org/content/instasearch) on Eclipse Marketplace.)
 
 Main Features
 --
