@@ -19,6 +19,14 @@ Java 1.7 or newer is required
 
 ([Add to favorites](http://marketplace.eclipse.org/content/instasearch) on Eclipse Marketplace.)
 
+Use
+--
+Once InstaSearch is successfully installed, you'll see a nice little "InstaSearch" search tab appear at the bottom:
+
+![Screenshot](https://i.stack.imgur.com/pnE3A.png)
+
+You can also click the `Search` menu option at the top --> `InstaSearch...`
+
 Main Features
 --
 * Instantly shows search results
