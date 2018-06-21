@@ -97,10 +97,6 @@ public class InstaSearchPreferencePage
 		
 		addBoolField(PreferenceConstants.P_FUZZY_SEARCH_AUTO, "Find similar matches when no exact matches found");
 		
-		String version = InstaSearchPlugin.getVersion();
-		addBoolField(PreferenceConstants.P_CHECK_UPDATES, "Notify about updates (ver. " + version + ")");
-		
-		
 		periodicReindexEnabled = addBoolField(PreferenceConstants.P_INDEX_UPDATE_ENABLED, "Enable Automatic-Reindex");
 		periodicReindexInterval =  new IntegerFieldEditor(PreferenceConstants.P_INDEX_UPDATE_INTERVAL, "Automatic Reindex interval (ms)",
 																												getFieldEditorParent());

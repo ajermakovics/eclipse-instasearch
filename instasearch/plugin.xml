@@ -64,15 +64,6 @@
                tooltip="Open Plugin&apos;s Preferences">
          </action>
          <action
-               class="it.unibz.instasearch.actions.CheckUpdatesActionDelegate"
-               icon="icons/update.gif"
-               id="it.unibz.instasearch.actions.CheckUpdatesActionDelegate"
-               label="Check for Updates"
-               menubarPath="pulldown"
-               style="push"
-               tooltip="Check for Updates of the Plugin">
-         </action>
-         <action
                class="it.unibz.instasearch.actions.DeleteIndexActionDelegate"
                id="it.unibz.instasearch.actions.DeleteIndexActionDelegate"
                label="Delete Index"
