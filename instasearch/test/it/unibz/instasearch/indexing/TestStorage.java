@@ -53,8 +53,8 @@ public class TestStorage implements IStorage
 		return false;
 	}
 	
-	@Override
-	public <T> T getAdapter(Class<T> adapter) {
+	@SuppressWarnings("rawtypes")
+	public Object getAdapter(Class adapter) {
 		return null;
 	}
 }
