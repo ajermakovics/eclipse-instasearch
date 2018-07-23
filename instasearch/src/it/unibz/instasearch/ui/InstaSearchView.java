@@ -12,12 +12,10 @@
 package it.unibz.instasearch.ui;
 
 import it.unibz.instasearch.InstaSearchPlugin;
-import it.unibz.instasearch.actions.CheckUpdatesActionDelegate;
 import it.unibz.instasearch.actions.ShowExceptionAction;
 import it.unibz.instasearch.indexing.Field;
 import it.unibz.instasearch.indexing.SearchQuery;
 import it.unibz.instasearch.indexing.SearchResultDoc;
-import it.unibz.instasearch.jobs.CheckUpdatesJob;
 import it.unibz.instasearch.prefs.PreferenceConstants;
 import it.unibz.instasearch.ui.ResultContentProvider.MatchLine;
 
@@ -39,7 +37,6 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.text.IFindReplaceTarget;
 import org.eclipse.jface.util.IPropertyChangeListener;
@@ -109,8 +106,6 @@ public class InstaSearchView extends ViewPart implements ModifyListener, ILogLis
 	public void init(IViewSite site) throws PartInitException 
 	{
 		super.init(site);
-		
-		scheduleUpdateCheck();	// schedule update check if view is opened
 		
 		InstaSearchPlugin.getDefault().getLog().addLogListener(this); // listen for exceptions
 		
@@ -261,7 +256,7 @@ public class InstaSearchView extends ViewPart implements ModifyListener, ILogLis
 		
 		resultViewer.setContentProvider(contentProvider);
 		resultViewer.setLabelProvider(decoratedLabelProvider);
-		resultViewer.setSorter(null);
+		resultViewer.setComparator(null);
 		
 		getViewSite().setSelectionProvider(resultViewer);
 		resultViewer.addTreeListener(this);
@@ -494,19 +489,6 @@ public class InstaSearchView extends ViewPart implements ModifyListener, ILogLis
 		};
 	}
 	
-	private void scheduleUpdateCheck()
-	{
-		boolean checkUpdates = InstaSearchPlugin.getBoolPref(PreferenceConstants.P_CHECK_UPDATES);
-		if( !checkUpdates )
-			return;
-		
-		CheckUpdatesJob checkUpdatesJob = new CheckUpdatesJob();
-		checkUpdatesJob.setSystem(true);
-		checkUpdatesJob.addJobChangeListener(new UpdateJobChangeListener());
-		checkUpdatesJob.schedule(InstaSearchPlugin.getIntPref(PreferenceConstants.P_UPDATE_CHECK_DELAY));
-	}
-
-	
 	/**
 	 * Logging an error in the plugin
 	 * Create an action that allows reporting it
@@ -555,53 +537,6 @@ public class InstaSearchView extends ViewPart implements ModifyListener, ILogLis
 		typingSearchDelay = InstaSearchPlugin.getIntPref(PreferenceConstants.P_TYPING_SEARCH_DELAY);
 		maxResults = InstaSearchPlugin.getIntPref(PreferenceConstants.P_SHOWN_FILES_COUNT);
 		incrementalSearchEnabled = InstaSearchPlugin.getBoolPref(PreferenceConstants.P_INCREMENTAL_SEARCH);
-	}
-	
-	/**
-	 * Waits for {@link CheckUpdatesJob} to finish and notifies if update is available 
-	 * by placing an Update button in the view's toolbar
-	 */
-	private class UpdateJobChangeListener extends JobChangeAdapter {
-	
-		public void done(IJobChangeEvent event)
-		{
-			IStatus status = event.getResult();
-			
-			if( status.getSeverity() == IStatus.OK )
-			{
-				boolean updateAvailable = (status.getCode() == CheckUpdatesJob.UPDATE_AVAILABLE_CODE); 
-				if( updateAvailable ) 
-				{
-					getViewSite().getShell().getDisplay().asyncExec(new Runnable() {
-						public void run()
-						{
-							addUpdateAction();
-							setTitleToolTip("New version available");
-							getViewSite().getActionBars().getStatusLineManager().setMessage(getTitleImage(), "New version available");
-						}					
-					});
-				} 
-				
-				
-			}
-		}
-		
-		private void addUpdateAction() { 
-			IAction updateAction = CheckUpdatesJob.createUpdateNotificationAction();
-			updateAction.setImageDescriptor( InstaSearchPlugin.getImageDescriptor("lightbulb") );
-			
-			IToolBarManager mgr = getViewSite().getActionBars().getToolBarManager();
-			mgr.add(updateAction);
-			mgr.update(true);
-			
-			IMenuManager menuMgr = getViewSite().getActionBars().getMenuManager();
-			
-			menuMgr.add(updateAction);
-			
-			IContributionItem checkUpdatesItem = mgr.find(CheckUpdatesActionDelegate.ID);
-			if( checkUpdatesItem != null ) 
-				checkUpdatesItem.setVisible(false); // hide Check for Updates action
-		}
 	}
 	
 	/**

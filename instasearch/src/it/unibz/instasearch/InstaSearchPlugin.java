@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.eclipse.core.net.proxy.IProxyService;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -32,7 +31,6 @@ import org.eclipse.ui.IWorkingSetManager;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
-import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -48,7 +46,6 @@ public final class InstaSearchPlugin extends AbstractUIPlugin {
 	
 	private String indexDirLocation;
 	private InstaSearch instaSearch;
-	private ServiceTracker<IProxyService,IProxyService> proxyServiceTracker;
 	private boolean debug = false;
 	
 	/**
@@ -216,15 +213,6 @@ public final class InstaSearchPlugin extends AbstractUIPlugin {
 		return getBundleHeader(Constants.BUNDLE_DOCURL);
 	}
 	
-	public static String getUpdateLocation() {
-		
-		return getBundleHeader(Constants.BUNDLE_UPDATELOCATION);
-	}
-	
-	public static String getErrorReportURL() {
-		return getBundleHeader("ErrorReportURL");
-	}
-	
 	public static String getPluginName() {
 		return getBundleHeader(Constants.BUNDLE_NAME);
 	}
@@ -232,7 +220,7 @@ public final class InstaSearchPlugin extends AbstractUIPlugin {
 	public static String getPluginId() {
 		return PLUGIN_ID;
 	}
-
+	
 	public static String getVersion() {
 		return getBundleHeader(Constants.BUNDLE_VERSION);
 	}
@@ -318,20 +306,6 @@ public final class InstaSearchPlugin extends AbstractUIPlugin {
 	{
 		if( plugin != null )
 			plugin.getPreferenceStore().removePropertyChangeListener(listener);
-	}
-	
-	public IProxyService getProxyService() {
-		try {
-			if (proxyServiceTracker == null) {
-				proxyServiceTracker = new ServiceTracker<IProxyService,IProxyService>(getBundle().getBundleContext(), IProxyService.class, null);
-				proxyServiceTracker.open();
-			}
-			return proxyServiceTracker.getService();
-		} catch (Exception e) {
-			InstaSearchPlugin.log(e);
-		}
-		
-		return null;
 	}
 	
 	private void configureDebug() 

@@ -21,6 +21,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Shell;
@@ -68,10 +69,7 @@ public class InstaSearchUI
 	}
 	
 	public static void showError(IStatus status, String message) {
-		
-		//status.getException().printStackTrace();
-		
-		ReportErrorDialog.openReportError(getActiveShell(), InstaSearchPlugin.getPluginName(), message, status);
+		ErrorDialog.openError(getActiveShell(), InstaSearchPlugin.getPluginName(), message, status);
 				
 		InstaSearchPlugin.log(status);
 	}

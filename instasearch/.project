@@ -34,7 +34,7 @@
 		<link>
 			<name>root_pom.xml</name>
 			<type>1</type>
-			<location>/Users/ajermakovics/Workspace/eclipse-instasearch/pom.xml</location>
+			<locationURI>UP/pom.xml</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>

@@ -5,17 +5,14 @@ Bundle-SymbolicName: it.unibz.instasearch;singleton:=true
 Bundle-Version: 1.5.7.qualifier
 Bundle-Activator: it.unibz.instasearch.InstaSearchPlugin
 Bundle-DocURL: https://github.com/ajermakovics/eclipse-instasearch
-Bundle-UpdateLocation: http://code.inf.unibz.it/instasearch/downloads/ver.php
-ErrorReportURL: http://code.inf.unibz.it/instasearch/downloads/contact/send.php
+Bundle-UpdateLocation: http://dl.bintray.com/ajermakovics/InstaSearch/
 Require-Bundle: org.eclipse.ui;bundle-version="3.7.0",
  org.apache.lucene;bundle-version="[2.9.1,2.9.2]",
  org.apache.lucene.analysis;bundle-version="[2.9.1,2.9.2)",
- org.apache.commons.httpclient,
  org.apache.commons.lang,
  org.eclipse.ui.ide,
  org.eclipse.ui.editors,
  org.eclipse.ui.workbench.texteditor,
- org.eclipse.core.net,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
  org.eclipse.search,

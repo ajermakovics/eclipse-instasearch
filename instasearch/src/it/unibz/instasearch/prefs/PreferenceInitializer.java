@@ -40,7 +40,6 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	public void initializeDefaultPreferences() 
 	{
 		IPreferenceStore store = InstaSearchPlugin.getDefault().getPreferenceStore();
-		store.setDefault(PreferenceConstants.P_CHECK_UPDATES, true);
 		store.setDefault(PreferenceConstants.P_SHOW_MATCH_COUNT, true);
 		store.setDefault(PreferenceConstants.P_INDEX_ARCHIVES, false);
 		store.setDefault(PreferenceConstants.P_INDEX_EMPTY_EXTENSION, false);
@@ -52,7 +51,6 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.P_SHOWN_FILES_COUNT, 25);
 		store.setDefault(PreferenceConstants.P_SHOWN_LINES_COUNT, 4);
 		
-		store.setDefault(PreferenceConstants.P_UPDATE_CHECK_DELAY, 10000);
 		store.setDefault(PreferenceConstants.P_TYPING_SEARCH_DELAY, 200);
 		store.setDefault(PreferenceConstants.P_INDEX_UPDATE_INTERVAL, 60000);
 		store.setDefault(PreferenceConstants.P_INDEX_UPDATE_ENABLED, true);
