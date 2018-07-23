@@ -462,8 +462,8 @@ public class WorkspaceIndexerJDT extends WorkspaceIndexer {
 			return true; 
 		}
 
-		@Override
-		public <T> T getAdapter(Class<T> adapter) {
+		@SuppressWarnings("rawtypes")
+		public Object getAdapter(Class adapter) {
 			return classFile.getAdapter(adapter);
 		}
 		

@@ -213,15 +213,6 @@ public final class InstaSearchPlugin extends AbstractUIPlugin {
 		return getBundleHeader(Constants.BUNDLE_DOCURL);
 	}
 	
-	public static String getUpdateLocation() {
-		
-		return getBundleHeader(Constants.BUNDLE_UPDATELOCATION);
-	}
-	
-	public static String getErrorReportURL() {
-		return getBundleHeader("ErrorReportURL");
-	}
-	
 	public static String getPluginName() {
 		return getBundleHeader(Constants.BUNDLE_NAME);
 	}
@@ -229,7 +220,7 @@ public final class InstaSearchPlugin extends AbstractUIPlugin {
 	public static String getPluginId() {
 		return PLUGIN_ID;
 	}
-
+	
 	public static String getVersion() {
 		return getBundleHeader(Constants.BUNDLE_VERSION);
 	}

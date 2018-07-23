@@ -71,7 +71,7 @@ class MatchHighlightJob extends Job implements ISchedulingRule, IPartListener
 		this.workbenchPage = workbenchPage;
 		
 		IEditorInput input = contentProvider.getEditorInput(doc);
-		IEditorDescriptor editorDesc = IDE.getEditorDescriptor(doc.getFileName(), true, true);
+		IEditorDescriptor editorDesc = IDE.getEditorDescriptor(doc.getFileName());
 		
 		IEditorPart editorPart = IDE.openEditor(workbenchPage, input, editorDesc.getId());
 		this.editor = getTextEditor(input, editorPart);
