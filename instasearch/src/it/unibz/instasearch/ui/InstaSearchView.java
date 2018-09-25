@@ -64,6 +64,8 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
@@ -343,6 +345,16 @@ public class InstaSearchView extends ViewPart implements ModifyListener, ILogLis
 					searchText.selectAll();
 				}
 			}
+		}
+		else if (e.keyCode == SWT.ARROW_DOWN && searchText.isFocusControl())
+		{
+			Tree resultTree = resultViewer.getTree();
+			if (resultTree.getItems().length == 0)
+				return;
+
+			TreeItem item = resultTree.getItem(0);
+			resultTree.setSelection(item);
+			resultTree.setFocus();
 		}
 		else if( e.getSource() == searchText && e.keyCode == SWT.CR && (e.stateMask & SWT.CTRL)!=0 )
 		{
