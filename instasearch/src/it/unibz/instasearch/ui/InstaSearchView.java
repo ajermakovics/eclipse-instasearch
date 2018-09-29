@@ -11,14 +11,6 @@
  */
 package it.unibz.instasearch.ui;
 
-import it.unibz.instasearch.InstaSearchPlugin;
-import it.unibz.instasearch.actions.ShowExceptionAction;
-import it.unibz.instasearch.indexing.Field;
-import it.unibz.instasearch.indexing.SearchQuery;
-import it.unibz.instasearch.indexing.SearchResultDoc;
-import it.unibz.instasearch.prefs.PreferenceConstants;
-import it.unibz.instasearch.ui.ResultContentProvider.MatchLine;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -38,6 +30,7 @@ import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.IFindReplaceTarget;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -70,6 +63,15 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
+
+import it.unibz.instasearch.InstaSearchPlugin;
+import it.unibz.instasearch.actions.BuildIndexActionDelegate;
+import it.unibz.instasearch.actions.ShowExceptionAction;
+import it.unibz.instasearch.indexing.Field;
+import it.unibz.instasearch.indexing.SearchQuery;
+import it.unibz.instasearch.indexing.SearchResultDoc;
+import it.unibz.instasearch.prefs.PreferenceConstants;
+import it.unibz.instasearch.ui.ResultContentProvider.MatchLine;
 
 /**
  * 
@@ -414,7 +416,17 @@ public class InstaSearchView extends ViewPart implements ModifyListener, ILogLis
 		
 		if( sq == null || !sq.isLimited() )
 			moreResults.setEnabled(false);
-				
+
+        manager.add( new Separator() );
+
+        Action rebuildSearchIndex = new Action( "Build or Re-build the Search Index" ) {
+            @Override
+            public void run() {
+                new BuildIndexActionDelegate().run(this);
+            }
+        };
+        manager.add(rebuildSearchIndex);
+
 	}
 	
 
