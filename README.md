@@ -13,7 +13,7 @@ Download / Installation
 --
 In Eclipse please install using the **Eclipse Marketplace** from the *Help* menu ([how-to](http://marketplace.eclipse.org/marketplace-client-intro))
 
-Alternatively you can install using the update site `http://dl.bintray.com/ajermakovics/InstaSearch/`
+Alternatively you can install using the update site `https://dl.bintray.com/ajermakovics/InstaSearch/`
 
 Java 1.7 or newer is required
 
